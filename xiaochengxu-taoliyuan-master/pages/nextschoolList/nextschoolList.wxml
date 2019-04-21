@@ -1,0 +1,29 @@
+<!--pages/nextschoolList/nextschoolList.wxml-->
+<!-- <scroll-view scroll-y="true" bindscroll="scroll" style='height:449px;' bindscrolltolower="top" class="friend_list">
+    <block wx:for="{{school_list}}">
+      <view data-schoolid="{{item.schoolType}}" id="{{item.id}}" data-joinflag="{{item.JOIN_STATUS}}" bindtap='homepage'>
+         <a class="room">{{item.schoolName}}</a>
+         <a class="room">进入学校首页</a>
+      </view>
+      
+    </block>
+</scroll-view> -->
+<!--pages/homepage/preview/preview.wxml-->
+<view class='containt'>
+    <view class="swiper-tab">
+      <view bindtap="swichNav" class="swiper-tab-list " >各地校友分会</view>
+    </view>
+        <view wx:for="{{datalist}}" wx:for-index='index' class='content_list'> <!-- 第一层开始 -->
+              <view class='common parent1' id="schoolId" >
+                  <text wx:if="{{item.regionName}}" class='title' >{{item.regionName}}</text>   
+              </view>
+              <!-- 第二层开始-->
+              <view style='background:#FAFAFA;' wx:for="{{item.regionValue}}" wx:for-item="item2">
+                  <view class='common parent2'  id='{{item2.schoolId}}' catchtap='homepage'>
+                      {{item2.schoolName}} 
+                  </view>  
+              </view>
+                <!-- 第二层结束-->
+        </view> 
+        <!-- 第一层结束 -->
+</view>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "活动详情",
+  "usingComponents": {
+    "i-input": "../../dist/input/index",
+    "diy-rich-text": "../../components/richTextDIY/richTextDIY"
+  }
+}

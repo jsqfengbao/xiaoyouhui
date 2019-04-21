@@ -1,0 +1,46 @@
+.img{width:40rpx;height:40rpx; vertical-align: middle;}
+.mt40{margin: 20rpx 0;}
+weui-cell__bd.mt40{width:30rpx;height:30rpx;}
+.topic-main { padding: 20rpx;}
+.topic-input {border: 1px solid #007fff;border-radius: 15rpx; padding: 10rpx;margin-top: 20rpx;}
+.topic-textarea{border: 1px solid #007fff; border-radius: 15rpx; margin-top: 20rpx;padding: 10rpx;}
+.topic-button{margin-top: 20rpx;}
+.topic-desc{
+  width:90%;
+  margin-left:5%;
+}
+
+button{
+  background: #007fff;
+  color: #fff;
+  height:90rpx;
+  line-height:90rpx;
+  width: 90%;
+  margin-top:50px;
+  }
+
+.radio-group {
+    border-bottom: 1px solid #ddd;
+}
+.radio {
+    display: block;
+    border-top: 1px solid #ddd;
+    padding: 5px;
+}
+.radio text{
+  padding-left: 26rpx;
+}
+.right{
+  float:right;
+  padding-right:26rpx;
+
+}
+.title{
+  height: 95rpx;
+  line-height: 95rpx;
+}
+.page__desc{
+  padding-left:16px;
+  font-size:16px;
+
+}

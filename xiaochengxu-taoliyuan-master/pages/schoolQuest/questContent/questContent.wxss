@@ -1,0 +1,8 @@
+.topic-main { padding: 20rpx;}
+.topic-input {border: 1px solid #007fff;border-radius: 15rpx; padding: 10rpx;margin-top: 20rpx;}
+.topic-textarea{border: 1px solid #007fff; border-radius: 15rpx; margin-top: 20rpx;padding: 10rpx;}
+.topic-button{margin-top: 20rpx;}
+.input { width: 100%;}
+.textarea {width: 100%;}
+button{background: #007fff; color: #fff; height:90rpx;
+  line-height:90rpx;}

@@ -1,0 +1,130 @@
+<view class="page">
+    <view class="topic-button">
+        <button type="default" size="default" catchtap="showAALinkMan">各地校友会联系人</button>
+    </view>
+
+    <view class="xiaoyou-top">目前共有{{TotalCount}}位校友的信息</view>
+    <view class="page__bd">
+        <view class="weui-search-bar" bindtap="searchTap">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box xiaoyou-ru">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}"
+                           focus="{{inputShowed}}" bindinput="inputTyping"/>
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <input class="weui-search-bar__text" placeholder='搜索' bindinput='searchInput'> </input>
+                    <!-- <view class="weui-search-bar__text">搜索</view> -->
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+        <scroll-view scroll-y="true" bindscroll="scroll" style='height:449px;'>
+            <block wx:for="{{selectallList||searchList}}">
+                <view class="page__bd">
+                    <view class="weui-cells weui-cells_after-title">
+                        <view class="weui-cell" style='display:flex;'>
+                            <view class='head_image'>
+                                <image src='{{item.avatar?item.avatar:noimage}}'></image>
+                            </view>
+                            <view class='fontClass'>
+                                <view class='head_image' style='display:flex;border-bottom:1px solid #999;'>
+                                    <view class='head_image line'>{{item.name}}</view>
+                                    <view class='head_image line' style='text-align:right;'
+                                          wx:if="{{item.distance!='没有定位'}}">{{item.distance}}
+                                        <text style='color:#999;'>公里</text>
+                                    </view>
+                                    <view class='head_image line' style='text-align:right;' wx:else>{{item.distance}}
+                                        <text style='color:#999;'></text>
+                                    </view>
+                                </view>
+                                <view class='head_image'>
+                                    <text class='line'>{{item.inSchool}}年</text>
+                                    <text style='padding-left:32rpx;' class='line'>{{item.education}}</text>
+                                </view>
+                            </view>
+                            <!-- <view class="weui-cell__hd">
+                              <view class="weui-label"> 张三</view> -->
+                            <!-- <view class="weui-label"> {{item.name}}</view> -->
+                            <!-- </view> -->
+                            <!-- <view  class="weui-cell__bd"  > -->
+                            <!-- 13045854589 -->
+                            <!-- {{item.telphone}} -->
+                            <!-- </view>  -->
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+        <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view>实时搜索文本</view>
+                </view>
+            </navigator>
+            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view>实时搜索文本</view>
+                </view>
+            </navigator>
+            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view>实时搜索文本</view>
+                </view>
+            </navigator>
+            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view>实时搜索文本</view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <block wx:for="{{AAList}}" wx:key="item">
+        <view class="page__bd">
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell" index="{{index}}" id="{{item.ID}}" catchtap="SchoolfellowDetails">
+                    <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                        <image src="{{item.AVATAR_URL}}"></image>
+                    </view>
+                    <view class="weui-cell__bd xiaoyou-ft">
+                        <view class="weui-cell">
+                            <view class="weui-cell__bd">{{item.NAME}}</view>
+                            <view class='weui-cell__ft'>
+                                <view wx:if="{{item.DISTANCE=='没有定位'}}">
+                                    <text class="xiaoyou-juli">{{item.DISTANCE}}</text>
+                                    公里
+                                </view>
+                                <view wx:else>
+                                    <view>{{"没有定位"}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-cell xiaoyou-ruxue">
+                            <view>{{item.ENTRANCE_DAY + "年入学"}}</view>
+                            <view>{{item.DEGREE}}</view>
+                            <view wx:if="{{isAdmin == 1}}">
+                                <view wx:if="{{item.ISVALIDATE == 1}}">
+                                    <button type="default" index="{{index}}" id="{{item.ID}}" size="default"
+                                            catchtap="approveAA"> 批准
+                                    </button>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view class="xiaoyou-ditu">
+        <image src="/images/map-icon.png" style='width:158rpx; height:158rpx;' catchtap="showMap"></image>
+    </view>
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

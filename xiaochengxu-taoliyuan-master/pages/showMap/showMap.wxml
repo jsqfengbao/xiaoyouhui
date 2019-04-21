@@ -1,0 +1,22 @@
+<view class="container" style="display: flex;flex-direction: column">
+    <map id="map" scale="{{scale}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap"
+         latitude="{{latitude}}" longitude="{{longitude}}"
+         controls="{{controls}}" show-location bindregionchange="regionchange"
+         style="width: 100%; flex-grow: 1;" enable-zoom="true">
+    </map>
+    <view style="justify-content: center;height: 400rpx;display: flex;align-items: center;font-size: 32rpx;flex-direction: column; " wx:if="{{noGeo}}">
+        <view style="margin-bottom: 20rpx">
+            未获取您的地理位置,无法显示校友位置
+        </view>
+        <view>
+            点击下方更新按钮获取
+        </view>
+    </view>
+    <view style="display: flex;justify-content: center;align-items: center">
+        <view wx:if="{{geoSuccess}}"  class="primary-button" style="flex-shrink:0;font-size: 24rpx;margin: 20rpx;display: inline-block;">更新完成</view>
+        <view wx:else catchtap="updateLocation" class="primary-button" style="flex-shrink:0;font-size: 24rpx;margin: 20rpx;display: inline-block;">更新我的地理位置</view>
+        <view style="color: #19be6b;margin-left: 10rpx;" wx:if="{{geoSuccess}}" class="iconfont icon-wancheng"></view>
+    </view>
+</view>
+
+

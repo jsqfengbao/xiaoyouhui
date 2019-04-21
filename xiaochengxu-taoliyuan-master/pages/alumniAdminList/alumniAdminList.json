@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "各分会联系人",
+  "usingComponents": {
+    "i-modal": "../../../dist/modal/index",
+    "i-load-more": "../../dist/load-more/index"
+
+  }
+}

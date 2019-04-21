@@ -1,0 +1,19 @@
+<!--pages/inviteList/inviteList.wxml-->
+<view class="container">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20rpx">
+        <view wx:if="{{total>0}}">已邀请{{total}}人</view>
+        <view wx:else>未发出过邀请，快去邀请小伙伴加入吧</view>
+        <!--<view style="background: #2d8cf0;color: white;padding:10rpx 20rpx;margin-left: 10rpx;">{{total>0?'继续邀请':'我要邀请'}}</view>-->
+        <view>
+            <button open-type="share"  style="background: #2d8cf0;color: white;padding:20rpx 20rpx;margin-left: 10rpx;font-size: 30rpx;line-height: 100%">
+                {{total>0?'继续邀请':'我要邀请'}}
+            </button>
+        </view>
+    </view>
+    <block  wx:for="{{inviteList}}">
+        <view bindtap="toAlumniInfo" data-user-id="{{item.userId}}" style="display: flex;align-items: center;padding:20rpx;margin: 20rpx;border: 1px solid #dddee1">
+            <image style="height: 80rpx;width:80rpx;border-radius: 80rpx" src="{{item.avatar?item.avatar:'/images/default.png'}}"></image>
+            <view style="color: #2d8cf0;margin-left: 60rpx">{{item.name?item.name:'未填写姓名'}}</view>
+        </view>
+    </block>
+</view>

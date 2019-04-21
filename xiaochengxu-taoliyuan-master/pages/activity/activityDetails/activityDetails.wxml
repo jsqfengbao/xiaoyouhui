@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="topic-detail">
+    <view class="topic-owner">
+        <view class="topic-title">{{AACDetail.title}}</view>
+    </view>
+    <!-- <view class="topic-info">
+        <text class='color'>发布时间：</text><text>{{AACDetail.activityTime}}</text>
+    </view> -->
+    <!-- <view class="topic-desc">
+        <text>{{AACDetail.DESCRIPTION}}</text>
+    </view> -->
+    <view class="topic-info">
+        <!-- <text class='color'>活动时间：</text><text>{{AACDetail.activityTime}}--{{AACDetail.END_TIME}}</text> -->
+        <text class='color'>活动时间：</text><text>{{AACDetail.activityTime}}</text>
+    </view>
+    <view class="topic-info">
+        <text class='color'>活动地点：</text><text>{{AACDetail.activityPlace}}</text>
+    </view>
+     <view class="topic-info">
+        <text class='color'>活动内容：</text> <rich-text nodes="{{AACDetail.content}}"></rich-text>
+    </view>
+  </view>
+  <view class="replies">
+    <block>
+      <view wx:if="{{AACDetail.linkName}}">
+        <view class="topic-desc">
+          <text>联系人员： {{AACDetail.linkName}}</text>
+          <view></view>
+          <text>联系电话：</text>
+          <text class="contract_tel" catchtap="calling" data-phone_num="{{AACDetail.linkTelephone}}">{{AACDetail.linkTelephone}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

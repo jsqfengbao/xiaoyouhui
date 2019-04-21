@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "填写申请",
+  "usingComponents": {
+    "i-modal": "../../../dist/modal/index"
+  }
+}

@@ -1,0 +1,27 @@
+<view class="container">
+
+    <view class="topic-title">{{newsDetail.title}}</view>
+
+
+    <view class="topic-info">
+        <text style="margin-right: 20rpx" wx:if="{{newsDetail.author}}">作者：{{newsDetail.author}}</text>
+        <text >{{newsDetail.activityTime}}</text>
+    </view>
+    <!--<view class="topic-desc-rich">-->
+        <!--<rich-text   nodes="{{newsDetail.content}}"></rich-text>-->
+    <!--</view>-->
+    <diy-rich-text wx:if="{{newsDetail.content}}" InRichTextData="{{newsDetail.content}}" />
+
+    <!--<view style="padding-bottom: 100rpx"> </view>-->
+
+    <view style="position: fixed;bottom: 100rpx;right:20rpx;display: flex;height: 220rpx;flex-direction: column">
+        <button open-type="share" class="open" style="display: flex;flex-direction: column;justify-content: center;align-items: center;width: 100rpx;color: #fff;line-height: 100rpx;border-radius: 100rpx;background: #0bb20c;opacity: 0.8">
+            <view class="iconfont icon-fenxiang" style="font-size: 40rpx"></view>
+            <!--<view style="font-size: 28rpx">分享</view>-->
+        </button>
+        <button bindtap="toHome" class="open" style="display: flex;flex-direction: column;justify-content: center;align-items: center;width: 100rpx;color: #fff;line-height: 100rpx;border-radius: 100rpx;background: #2d8cf0;opacity: 0.8;margin-top: 2rpx">
+            <view class="iconfont icon-shouye" style="font-size: 40rpx"></view>
+            <!--<view style="font-size: 28rpx">分享</view>-->
+        </button>
+    </view>
+</view>

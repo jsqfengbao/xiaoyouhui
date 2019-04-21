@@ -1,0 +1,12 @@
+.header { height: 80rpx; display: flex; align-items: center; justify-content: center; font-size: 60rpx; background-color: #56abe4; border-bottom: 1px solid #eee;}
+.topic-item { padding: 30rpx; border-bottom: 1px solid #eee;}
+.topic-item { display: flex; flex-direction: row;}
+.member-avatar { width: 140rpx; height: 140rpx; margin-right: 20rpx; border-radius: 5%;}
+.topic-info { flex: 1; font-size: 24rpx;}
+.topic-inner { display: flex; align-items: center; color: #555;}
+.topic-title {font-size: 36rpx; line-height: 1.4; box-sizing: border-box;text-overflow: -o-ellipsis-lastline; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+.topic-left { flex: 1;}
+.node-name { display: inline-block; margin-right: 20rpx; padding: 5rpx 10rpx; border-radius: 5rpx;}
+.reply-num { display: inline-block; margin-left: 50rpx; padding: 10rpx; height: 22rpx; background-color: #ddd; border-radius: 5rpx; color: #555;}
+.member-nickname { color: #aaa;}
+.view-title { margin-top: 5px; text-align: center; font-size: 36rpx;}

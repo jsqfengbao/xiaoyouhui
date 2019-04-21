@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "个人信息",
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index",
+    "i-icon": "../../dist/icon/index",
+    "i-input": "../../dist/input/index",
+    "i-switch": "../../dist/switch/index"
+  }
+}

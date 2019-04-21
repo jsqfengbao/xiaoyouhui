@@ -1,0 +1,8 @@
+/* pages/datalist/datalist.wxss */
+.cell-text{
+    margin-left: 50rpx;
+}
+
+.collapse-padding{
+    margin: 20rpx;
+}

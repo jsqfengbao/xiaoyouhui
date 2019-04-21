@@ -1,0 +1,97 @@
+<view class="container">
+
+    <!--<view class="panel">学校信息</view>-->
+
+
+    <view class="list-item">
+        <view class="label">学校名称:</view>
+        <input value="{{userData.STUDENT_NAME}}" placeholder="学校名称" bind:blur="schoolNameInput"/>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">学历
+            <text class="red">*</text>
+            :
+        </view>
+        <checkbox-group bindchange="selectDegreeInfo">
+            <checkbox value='0' checked='{{checkBox1}}'>高中</checkbox>
+            <checkbox value='1' checked='{{checkBox2}}'>中专</checkbox>
+            <checkbox value='2' checked='{{checkBox3}}'>大专</checkbox>
+            <checkbox value='3' checked='{{checkBox4}}'>本科</checkbox>
+            <checkbox value='4' checked='{{checkBox5}}'>硕士</checkbox>
+            <checkbox value='5' checked='{{checkBox6}}'>博士</checkbox>
+            <checkbox value='6' checked='{{checkBox7}}'>博士后</checkbox>
+            <checkbox value='7' checked='{{checkBox8}}'>MBA</checkbox>
+            <checkbox value='8' checked='{{checkBox9}}'>EMBA</checkbox>
+            <checkbox value='9' checked='{{checkBox9}}'>其他</checkbox>
+        </checkbox-group>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">入学时间
+            <text class="red">*</text>
+            :
+        </view>
+        <picker mode='selector' bindchange="changeEntranceDay" value="{{eindex}}" range="{{array}}">
+            <view>
+                {{entranceyear?entranceyear:"请选择入学时间"}}
+            </view>
+        </picker>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">毕业时间
+            <text class="red">*</text>
+            :
+        </view>
+        <picker mode='selector' bindchange="changeGraduationDay" value="{{eindex}}" range="{{array}}">
+            <view>
+                {{gyear?gyear:'请选择毕业时间'}}
+            </view>
+        </picker>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">院(系)<text class="red">*</text>:</view>
+        <input value="{{userData.DEPT}}" placeholder="院(系)" bind:blur="changeDept"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">专业<text class="red">*</text>:</view>
+        <input value="{{userData.major}}" placeholder="专业" bind:blur="changeMajor"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">班级:</view>
+        <input value="{{userData.CLASS}}" placeholder="班级" bind:blur="changeClass"/>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">学号:</view>
+        <input value="{{userData.STUDENT_ID}}" placeholder="学号" bind:blur="changeStudentID"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">硕导:</view>
+        <input value="{{userData.masterTutor}}" placeholder="硕导" bind:blur="changeMasterTeacher"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">博导:</view>
+        <input value="{{userData.DOCTOR_TEACHER}}" placeholder="博导" bind:blur="changeDoctorTeacher"/>
+    </view>
+
+
+    <button type="defaule" bindtap="submitData">提交数据</button>
+
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

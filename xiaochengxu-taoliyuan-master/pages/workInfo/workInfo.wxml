@@ -1,0 +1,40 @@
+<view class="container">
+
+
+    <view class="list-item">
+        <view class="label">工作城市:</view>
+        <picker mode="region" bindchange="changeWorkCity" custom-item="{{customItem}}">
+            {{userData.WORK_CITY||region}}
+        </picker>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">行业方向:</view>
+        <input value="{{userData.PROFESSION}}" placeholder="空格隔开的20个词以内" bind:blur="changeProfession"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">所在公司:</view>
+        <input value="{{userData.WORK_COMPANY}}" placeholder="所在公司" bind:blur="changeWorkCompany"/>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">职务:</view>
+        <input value="{{userData.WORK_TITLE}}" placeholder="职务" bind:blur="changeWorkTitle"/>
+    </view>
+
+    <button type="defaule" bindtap="submitData">提交数据</button>
+
+
+</view>
+
+
+
+
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

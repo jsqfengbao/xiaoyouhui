@@ -1,0 +1,51 @@
+.img{width:40rpx;height:40rpx; vertical-align: middle;}
+.mt40{margin: 20rpx 0;}
+weui-cell__bd.mt40{width:30rpx;height:30rpx;}
+.topic-main { padding: 20rpx;}
+.topic-input {border: 1px solid #007fff;border-radius: 15rpx; padding: 10rpx;margin-top: 20rpx;}
+.topic-textarea{border: 1px solid #007fff; border-radius: 15rpx; margin-top: 20rpx;padding: 10rpx;}
+.topic-button{margin-top: 20rpx;}
+.topic-desc{
+  width:90%;
+  margin-left:5%;
+}
+.input { width: 100%;}
+.textarea {width: 100%;}
+.picker-view {
+  width: 100%;
+  display: flex;
+  z-index:12;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  height: 40vh;
+}
+
+.picker-item {
+  line-height: 70rpx;
+  margin-left: 5rpx;
+  margin-right: 5rpx;
+  text-align: center;
+}
+button{
+  background: #007fff; 
+  color: #fff; 
+  height:90rpx;
+  line-height:90rpx;
+  width: 90%;
+  margin-top:50px;
+  }
+
+.picker{
+  padding: 26rpx;
+  width: 100%;
+  background-color: #FFFFFF;
+}
+.important{
+   color:red;
+   font-size:32rpx;
+}

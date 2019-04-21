@@ -1,0 +1,129 @@
+@charset 'utf-8';
+ /*@import "utils/font_icon.wxss"; */
+@import './iconfont/iconfont.wxss';
+@import 'weui.wxss';
+page{
+  height: 100%;
+}
+.container {
+  height: 100%;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  /* padding: 200rpx 0; */
+  box-sizing: border-box;
+  color: #1c2438;
+  font-size: 30rpx;
+  position: relative;
+  /*background: #f8f8f9;*/
+}
+.page{
+  background: #f8f8f9;
+}
+.title{
+  color: #1c2438;
+}
+button:after {
+  border:none;
+}
+
+.list-item{
+  display: flex;font-size: 30rpx;margin:0 20rpx;padding:20rpx 0;border-bottom: 1px solid #e9eaec;align-items: center;background-color: #fff;
+}
+.list-item input{
+  width: 100%;
+}
+.list-item picker{
+  width: 100%;
+}
+.label{
+  margin-right: 20rpx;color: #80848f;flex-shrink: 0;width: 130rpx;margin-left: 20rpx;
+}
+.call{
+  font-size: 24rpx;color: white;background-color: #2d8cf0;border-radius: 10rpx;padding: 5rpx 10rpx;margin-left: 20rpx
+}
+
+.panel{
+  margin: 15rpx 25rpx;color: #1c2438;font-size: 30rpx
+}
+.mb{
+  margin-bottom: 10rpx;
+}
+.border{
+  border-bottom: 1px solid #e9eaec;
+}
+
+
+.right-arrow{
+  position: relative;
+}
+.right-arrow:after {
+  content: " ";
+  display: inline-block;
+  height: 6px;
+  width: 6px;
+  border-width: 2px 2px 0 0;
+  border-color: #c8c8cd;
+  border-style: solid;
+  -webkit-transform: matrix(.71, .71, -.71, .71, 0, 0);
+  transform: matrix(.71, .71, -.71, .71, 0, 0);
+  top: -2px;
+  position: absolute;
+  top: 50%;
+  margin-top: -4px;
+  right: 2px
+}
+.open{
+  margin: 0;padding: 0;line-height: 0;background-color: #fff
+}
+.open-hover{
+  background-color: #fff;
+}
+.red{
+  color:red;
+  font-size:30rpx;
+}
+.to-map {
+  position: fixed;
+  bottom: 50rpx;
+  right: 50rpx;
+}
+.topic-desc-rich {
+  text-indent: 60rpx;
+  text-align: left;
+}
+.rich-img{
+  position: relative;
+  left: -2em;
+  /*max-width: 100%;*/
+  /*height: auto;*/
+}
+.danger-button{
+  background:#ed3f14;padding:10rpx 20rpx;color: white
+}
+.warning-button{
+  background:#ff9900;padding:10rpx 20rpx;color: white
+}
+
+.primary-button{
+  background:#2d8cf0;padding:10rpx 20rpx;color: white
+}
+.blue{
+    color: #2d8cf0;
+}
+
+.common{
+  border-top:1px solid #dddee1;
+  line-height:50rpx;
+  padding-top: 8rpx;
+  padding-bottom: 8rpx;
+
+}
+
+.item{
+  margin-left: 16rpx;
+  display: flex;
+  justify-content: space-between
+
+}

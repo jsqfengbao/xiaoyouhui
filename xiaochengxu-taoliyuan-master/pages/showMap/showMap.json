@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "校友地图",
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index"
+  }
+}

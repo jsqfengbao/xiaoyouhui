@@ -1,0 +1,17 @@
+<view class="page">
+    <view class="page__hd title">
+        <text class="page__desc">是否公开手机号</text>
+    </view>
+    <view class="page__bd">
+        <view class="section section_gap">
+            <radio-group class="radio-group" bindchange="radioChange">
+                <view class="radio" wx:for-items="{{items}}" wx:key="name">
+                    <text>{{item.value}}</text>
+                    <radio class="right" value="{{item.name}}" checked="{{item.checked}}"></radio>
+                </view>
+
+            </radio-group>
+        </view>
+    </view>
+    <button type="defaule" bindtap="submintData">确认</button>
+</view>

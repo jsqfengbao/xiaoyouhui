@@ -1,0 +1,44 @@
+<view class="container">
+
+    <view class="right-arrow-top"
+          style="display:flex;background: #fff;padding: 15rpx;margin-bottom: 15rpx;align-items: center ">
+
+
+        <button hover-class="open-hover" class="open" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+            <image wx:if="{{user.avatar}}" data-id="1" src="{{user.avatar}}" style="height: 120rpx;width: 120rpx"></image>
+            <image  wx:else src="{{localAvatar}}" style="height: 120rpx;width: 120rpx"></image>
+        </button>
+        <!--<view wx:else class="iconfont icon-morentouxiang" style="color:#75b4ff;font-size: 100rpx"></view>-->
+        <!--<view   class="iconfont icon-morentouxiang" style="color:#75b4ff;font-size: 100rpx; "></view>-->
+        <view style='padding-left:32rpx;'>{{user.nickname?user.nickname:user.username}}</view>
+    </view>
+
+    <view style="padding: 15rpx 15rpx;background: #f8f8f9">
+        <block wx:for="{{rowList}}">
+            <view hover-class="row-list-active" class="row-list" catchtap="{{item.func}}" style="{{index==rowList.length-1?'margin-bottom: 0':''}}">
+                <view class="row-list-content">
+                    <image src="{{item.image}}"></image>
+                    <!--<view  class="iconfont {{'icon-'+item.icon}}"></view>-->
+                    <text style="">{{item.title}}</text>
+                </view>
+                <view class="right-arrow"></view>
+            </view>
+        </block>
+    </view>
+
+
+
+    <!--<i-cell-group i-class="cell-group">
+        <block wx:for="{{rowList}}">
+            <i-cell hover="cell-hover" i-class="cell" title="{{item.title}}" is-link bind:click="{{item.func}}">
+                <image class="cell-image" slot="icon" src="{{item.image}}"></image>
+            </i-cell>
+        </block>
+    </i-cell-group>-->
+
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

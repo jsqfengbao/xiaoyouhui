@@ -1,0 +1,4 @@
+<!--pages/previewImg/previewImg.wxml-->
+<view class="container" style="display: flex;align-items: center">
+    <image mode="aspectFit" style="width: 100%;" src="{{url}}"></image>
+</view>

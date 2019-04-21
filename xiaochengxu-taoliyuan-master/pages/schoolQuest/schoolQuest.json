@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "有问必答",
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index"
+  }
+}

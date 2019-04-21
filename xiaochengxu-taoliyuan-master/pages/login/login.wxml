@@ -1,0 +1,17 @@
+<view class='warp'>
+    <view style='text-align:center;height:200rpx;'>
+        <image src="../../images/logo.jpg" mode='aspectFit' style='width:160rpx;height:100%;'></image>
+    </view>
+    <view class='font'>
+        <h3>多载失联本寻常</h3>
+        <h3>今朝千万聚一堂</h3>
+        <h3>相同血脉实难忘</h3>
+        <h3>未来已来共分享</h3>
+    </view>
+    <button open-type="getUserInfo" hover-class='none' bindgetuserinfo="getUserInfoFun">登录桃李园</button>
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

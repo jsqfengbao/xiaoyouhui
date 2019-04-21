@@ -1,0 +1,23 @@
+<scroll-view scroll-y="true" bindscroll="scroll" style='height:449px;' bindscrolltolower="top" class="container">
+    <block wx:for="{{activityList}}" wx:key="item">
+      <view class="topic-detail"  id="{{item.id}}" catchtap="ActivityDetails">
+        <view class="topic-owner">
+          <text class="topic-title">{{item.schoolName}}</text>
+        </view>
+        <view class="topic-desc">
+           <view wx:if="{{item.adminName}}">
+              <view class="topic-desc">
+                <text>联系人员： {{item.adminName}}</text>
+                <view></view>
+                <text>联系电话：</text>
+                <text class="contract_tel" catchtap="calling" data-phone_num="{{item.adminPhone}}">{{item.adminPhone}}</text>
+              </view>
+            </view>
+        </view>
+      </view>
+      </block>
+      <text wx:if="{{activityList.length==0}}">无数据加载...</text>
+      <loading hidden="{{hidden}}">
+        加载中...
+      </loading>
+</scroll-view>

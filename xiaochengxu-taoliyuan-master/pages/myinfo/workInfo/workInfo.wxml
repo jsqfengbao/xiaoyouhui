@@ -1,0 +1,53 @@
+<!--pages/myinfo/workInfo/workInfo.wxml-->
+<view class="page" >
+  <view class="page__bd">
+    <view class="weui-cells__title">工作信息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">工作城市</view>
+        </view>
+        <view class="weui-input">
+          <picker mode="region" bindchange="changeWorkCity" value="{{region}}" custom-item="{{customItem}}">
+           {{userData.WORK_CITY||region}}
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+
+          <view class="weui-label">行业方向</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="空格隔开的20个词以内" bindblur="changeProfession" value="{{userData.PROFESSION}}"></input>
+
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+
+          <view class="weui-label">所在公司</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="所在公司" bindblur="changeWorkCompany" value="{{userData.WORK_COMPANY}}"></input>
+
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">职务</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="职务" bindblur="changeWorkTitle" value="{{userData.WORK_TITLE}}"></input>
+        </view>
+      </view>
+
+    </view>
+   
+  </view>
+  <button type="defaule" bindtap="submintData">提交数据</button> 
+  <loading hidden="{{hidden}}">
+    提交中...
+  </loading>
+</view>

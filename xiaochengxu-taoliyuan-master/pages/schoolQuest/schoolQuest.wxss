@@ -1,0 +1,37 @@
+.header { height: 80rpx; display: flex; align-items: center; justify-content: center; font-size: 60rpx; background-color: #56abe4; border-bottom: 1px solid #eee;}
+.topic-item { margin: 20rpx; border-bottom: 1px solid #eee;}
+.topic-item { display: flex; flex-direction: row;position: relative;}
+.member-avatar { width: 140rpx; height: 140rpx; margin-right: 20rpx; border-radius: 5%;}
+.topic-info { flex: 1; font-size: 24rpx;}
+.topic-inner { display: flex; align-items: center; color: #6E48AA;}
+.topic-title { font-size: 36rpx; box-sizing: border-box; color: #6E48AA;}
+.topic-left { flex: 1;}
+.node-name { display: block; padding: 20rpx; background-color: #e5e5e5; color: #333; font-size: 36rpx; text-align: justify;}
+.reply-num { display: inline-block; margin-left: 50rpx; padding: 10rpx; height: 22rpx; background-color: #ddd; border-radius: 5rpx; color: #6E48AA;}
+.member-nickname { color: #999; font-size: 30rpx; margin: 20rpx 0;}
+.view-title { margin-top: 5px; text-align: center; font-size: 36rpx;}
+/* .parent{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+} */
+button {
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #fff;
+  background-color: #007fff;
+  width: 100%;
+  margin: 20rpx;
+  font-size: 36rpx;
+}
+.cancel{
+  position:absolute;
+  height:50rpx;
+  width:50rpx;
+  top:0;
+  right:20rpx;
+}
+.cancel image{
+  height: 100%;
+  width: 100%;
+}

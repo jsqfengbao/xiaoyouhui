@@ -1,0 +1,30 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cells__title">个人信息</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='selectInfo'>
+                <view class="weui-cell__bd">头像</view>
+                <view wx:if="{{userInfo != '' }}" class="weui-cell__hd" bindtap='changeImg'>
+                    <image src="{{userData.PHOTO_URL||userInfo.avatarUrl}}" class="img"></image>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" catchtap="personInfo">
+                <view class="weui-cell__bd">用户名</view>
+                <view class="weui-cell__ft">{{userData.NAME||userInfo.nickName}}</view>
+            </view>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" catchtap="bindPhone">
+                <view class="weui-cell__bd">手机号码</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{userData.FIRST_MOBILE}}</view>
+            </view>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{userData.SECOND_MOBILE}}">
+                <view class="weui-cell__bd">手机号码2</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{userData.SECOND_MOBILE}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

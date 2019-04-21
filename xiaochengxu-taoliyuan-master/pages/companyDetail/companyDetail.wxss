@@ -1,0 +1,26 @@
+.topic-owner { display: flex; align-items: center; margin-bottom: 20rpx;}
+.owner-avatar { width: 128rpx; height: 128rpx; margin-right: 30rpx; border-radius: 100%;}
+.topic-created { margin-left: 30rpx; text-align: justify;   color: #555;}
+.topic-title { flex: 1; box-sizing: border-box; line-height: 1.4; color: #333; align-content: center; font-size:36rpx;font-weight: bold;
+}
+.topic-info { margin-bottom: 20rpx; color:#555;font-size:28rpx;}
+.topic-desc { margin-bottom: 20rpx; word-wrap: break-word; word-break: normal; text-align: justify;   color:#000;text-indent:20px;
+}
+.replies { margin-top: 30rpx; border-top: 1px solid #ddd;}
+.replies-item { padding: 40rpx 0; border-bottom: 1px solid #eee;}
+.reply-owner { display: flex; align-items: center; margin-bottom: 20rpx;}
+.reply-avatar { width: 100rpx; height: 100rpx; border-radius: 100%; margin-right: 30rpx;}
+.reply-name, .reply-time, .reply-content { text-align: justify;   color: #999;}
+.reply-time { margin-left: 30rpx; color: #ccc;}
+.reply-content { padding: 0 20rpx;  word-wrap: break-word; word-break: normal; color: #999;}
+.contract_tel { color: #007fff; font-size: 40;}
+
+.list-item{
+    display: flex;font-size: 30rpx;margin:0 20rpx;padding:20rpx 0;border-bottom: 1px solid #e9eaec;align-items: center;background-color: #fff;
+}
+.label{
+    margin-right: 20rpx;color: #80848f;flex-shrink: 0;
+}
+.call{
+    font-size: 24rpx;color: white;background-color: #2d8cf0;border-radius: 10rpx;padding: 5rpx 10rpx;margin-left: 20rpx
+}

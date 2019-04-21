@@ -1,0 +1,204 @@
+<view class="container">
+
+        <view class="panel">基本信息</view>
+
+
+
+        <view class="list-item">
+            <view class="label">姓名<text class="red">*</text>:</view>
+            <input value="{{name}}" autofocus placeholder="请输入姓名" bind:blur="userNameInput"/>
+        </view>
+
+        <!--<view class="list-item">
+            <view class="label">手机号<text class="red">*</text>:</view>
+            <input value="{{telephone}}" disabled placeholder="请输入手机号" catchtap='changePhone' value="{{telephone}}"
+                   type="{{!isShowMobile?'password':'number'}}"/>
+            <checkbox-group catchchange="radioChange" style="flex-shrink: 0">
+                <checkbox wx:if="{{telephone}}" value='0' checked='{{!isShowMobile}}'>隐藏</checkbox>
+            </checkbox-group>
+        </view>-->
+        <view class="list-item">
+            <view class="label">手机号<text class="red">*</text>:</view>
+            <input value="{{telephone}}"  placeholder="请输入手机号" type="number" bind:blur="changePhone"/>
+        </view>
+        <view class="list-item" wx:if="{{showCode}}">
+            <view class="label">验证码<text class="red">*</text>:</view>
+            <input value="{{smsCode}}"  placeholder="请输入手机验证码" type="number" bind:blur="changeSmsCode"/>
+            <view bind:tap="getSmsCode"  style="flex-shrink: 0;color: #2d8cf0;border: 1px solid #2d8cf0;padding: 4rpx 20rpx;font-size: 22rpx">
+                {{sending?'正在发送...':'获取验证码'}}
+            </view>
+        </view>
+        <view class="list-item">
+            <view class="label" style="width: 160rpx">公开手机号:</view>
+            <i-switch value="{{isShowMobile}}"  bind:change="switchChange" slot="footer">
+                <view slot="open">是</view>
+                <view slot="close">否</view>
+            </i-switch>
+            <text wx:if="{{isShowMobile}}" style="color: #2d8cf0;font-size: 24rpx;margin-left: 20rpx;">仅校友可查看</text>
+            <text wx:else style="color: #80848f;font-size: 24rpx;margin-left: 20rpx;">将在校友详情中隐藏手机号</text>
+
+        </view>
+        <view class="list-item">
+            <view class="label">微信号:</view>
+            <input value="{{wechat}}"  placeholder="请输入微信号" bind:blur="changeWechat"/>
+        </view>
+        <view class="list-item">
+            <view class="label">QQ号:</view>
+            <input value="{{qq}}"  placeholder="请输入QQ号" bind:blur="changeQQ"/>
+        </view>
+
+        <view class="list-item">
+            <view class="label">籍贯:</view>
+            <picker mode="region" bindchange="changeNativePlace" custom-item="{{customItem}}">
+                {{nativePlace}}
+            </picker>
+        </view>
+
+        <view class="list-item" style="position: relative">
+            <view class="label">地理位置:</view>
+            <view style="color:#80848f;">用于查看与校友的距离</view>
+            <view class="call" wx:if="{{geoSuccess}}">OK</view>
+            <view class="call" wx:else bind:tap="getGeo">{{hasOldGeo?'点击更新':'点击获取'}}</view>
+            <!--<i-icon type="right"  style="color: #19be6b;margin-left: 10rpx;font-weight: bold;font-size: 40rpx"  />-->
+            <view style="color: #19be6b;margin-left: 10rpx;" wx:if="{{geoSuccess}}" class="iconfont icon-wancheng"></view>
+
+            <view bindtap="showTip" class="iconfont icon-wenhao" style="color: #ff9900;position: absolute;right: 0;padding: 0 20rpx;"></view>
+
+        </view>
+
+        <view class="list-item  " style="padding-right: 20rpx">
+            <view class="label">个人简介:</view>
+        </view>
+        <view class="profile">
+            <textarea style="width:100%;height:200rpx" maxlength="-1" type='text' name='new_value' bind:blur="changeProfile" value='{{personProfile}}'></textarea>
+        </view>
+
+
+
+
+
+
+    <view class="panel">学校信息</view>
+
+    <view class="list-item">
+        <view class="label">学校名称:</view>
+        <input value="{{userData.SCHOOL_NAME}}" placeholder="学校名称" bind:blur="schoolNameInput"/>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">学历
+            <text class="red">*</text>
+            :
+        </view>
+        <checkbox-group bindchange="selectDegreeInfo">
+            <checkbox value='0' checked='{{checkBox1}}'>高中</checkbox>
+            <checkbox value='1' checked='{{checkBox2}}'>中专</checkbox>
+            <checkbox value='2' checked='{{checkBox3}}'>大专</checkbox>
+            <checkbox value='3' checked='{{checkBox4}}'>本科</checkbox>
+            <checkbox value='4' checked='{{checkBox5}}'>硕士</checkbox>
+            <checkbox value='5' checked='{{checkBox6}}'>博士</checkbox>
+            <checkbox value='6' checked='{{checkBox7}}'>博士后</checkbox>
+            <checkbox value='7' checked='{{checkBox8}}'>MBA</checkbox>
+            <checkbox value='8' checked='{{checkBox9}}'>EMBA</checkbox>
+            <checkbox value='9' checked='{{checkBox9}}'>其他</checkbox>
+        </checkbox-group>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">入学时间
+            <text class="red">*</text>
+            :
+        </view>
+        <picker mode='selector' bindchange="changeEntranceDay" value="{{eindex}}" range="{{array}}">
+            <view>
+                {{entranceyear?entranceyear:"请选择入学时间"}}
+            </view>
+        </picker>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">毕业时间
+            <text class="red">*</text>
+            :
+        </view>
+        <picker mode='selector' bindchange="changeGraduationDay" value="{{gindex}}" range="{{array}}">
+            <view>
+                {{gyear?gyear:'请选择毕业时间'}}
+            </view>
+        </picker>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">院(系)<text class="red">*</text>:</view>
+        <input value="{{userData.DEPT}}" placeholder="院(系)" bind:blur="changeDept"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">专业<text class="red">*</text>:</view>
+        <input value="{{userData.major}}" placeholder="专业" bind:blur="changeMajor"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">班级:</view>
+        <input value="{{userData.CLASS}}" placeholder="班级" bind:blur="changeClass"/>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">学号:</view>
+        <input value="{{userData.STUDENT_ID}}" placeholder="学号" bind:blur="changeStudentID"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">硕导:</view>
+        <input value="{{userData.masterTutor}}" placeholder="硕导" bind:blur="changeMasterTeacher"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">博导:</view>
+        <input value="{{userData.DOCTOR_TEACHER}}" placeholder="博导" bind:blur="changeDoctorTeacher"/>
+    </view>
+
+
+    <view class="panel">工作信息</view>
+    <view class="list-item">
+        <view class="label">工作城市:</view>
+        <picker mode="region" bindchange="changeWorkCity" custom-item="{{customItem}}">
+            {{userData.WORK_CITY||region}}
+        </picker>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">行业方向:</view>
+        <input value="{{userData.PROFESSION}}" placeholder="空格隔开的20个词以内" bind:blur="changeProfession"/>
+    </view>
+
+    <view class="list-item">
+        <view class="label">所在公司:</view>
+        <input value="{{userData.WORK_COMPANY}}" placeholder="所在公司" bind:blur="changeWorkCompany"/>
+    </view>
+
+
+    <view class="list-item">
+        <view class="label">职务:</view>
+        <input value="{{userData.WORK_TITLE}}" placeholder="职务" bind:blur="changeWorkTitle"/>
+    </view>
+
+
+
+
+
+
+    <button type="defaule" bindtap="submitData">提交数据</button>
+
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

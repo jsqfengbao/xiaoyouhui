@@ -1,0 +1,41 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">学校</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请选择所在的学校" bindblur="changeProfession"></input>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">地区</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+                        <view class="picker">
+                            {{region[0]}}，{{region[1]}}，{{region[2]}}
+                        </view>
+                    </picker>
+
+                </view>
+            </view>
+        </view>
+        <view class=" tip">上传相关证明</view>
+        <view bindtap='uploadPhoto'>
+            <image src='../../../images/upload.png' mode='widthFix' class='upload'></image>
+        </view>
+        <view>
+            <image src='{{uplodUrl}}' mode='widthFix' class='upload'></image>
+        </view>
+    </view>
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>
+

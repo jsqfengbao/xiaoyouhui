@@ -1,0 +1,17 @@
+<!--pages/about/about.wxml-->
+<view>
+    <view style='text-align:center;height:200rpx;'>
+        <image src="../../images/logo.jpg" mode='aspectFit' style='width:160rpx;height:100%;'></image>
+    </view>
+    <view class='title' style="display: flex;flex-direction:column;align-items: center;font-size: 32rpx">
+        <view>多载失联本寻常</view>
+        <view>今朝千万聚一堂</view>
+        <view>相同血脉实难忘</view>
+        <view>未来已来共分享</view>
+    </view>
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

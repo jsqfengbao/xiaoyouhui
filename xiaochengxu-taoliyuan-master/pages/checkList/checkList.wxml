@@ -1,0 +1,14 @@
+<!--pages/checkList/checkList.wxml-->
+<view class="container">
+    <block  wx:for="{{userList}}">
+        <view bindtap="toAlumniInfo" data-apply-id="{{item.applyId}}" data-user-id="{{item.userId}}" style="display: flex;justify-content: space-between;align-items: center;padding:20rpx;margin: 20rpx;border: 1px solid #dddee1">
+            <view style="color: #2d8cf0">{{item.name}}</view>
+            <view style="display: flex;">
+                <!--<view class="danger-button" style="margin-right: 20rpx"  catchtap="handleClick" data-id="{{item.applyId}}">拒绝</view>-->
+                <!--<view class="warning-button" style="margin-right: 20rpx"  catchtap="handleClick" data-id="{{item.applyId}}">需修改</view>-->
+                <view class="primary-button"  catchtap="checkSuccess" data-apply-id="{{item.applyId}}" data-user-id="{{item.userId}}" >通过</view>
+            </view>
+        </view>
+    </block>
+    <view style="text-align: center" wx:if="{{noData}}">没有要审核的校友</view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "工作信息",
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index"
+  }
+}

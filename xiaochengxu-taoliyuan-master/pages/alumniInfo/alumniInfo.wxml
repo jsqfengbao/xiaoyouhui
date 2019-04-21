@@ -1,0 +1,57 @@
+<!--pages/personalInfo/personalInfo.wxml-->
+<i-message id="message" />
+<view class="container">
+
+    <view style="background-color: #f8f8f9;padding: 0 10rpx;">
+        <view class="panel">基本信息</view>
+        <i-input value="{{ user.name }}" title="姓名" disabled i-class="mb"/>
+        <!--<i-input value="{{ user.telephone }}" type="{{user.isShowMobile==1 || check ?'number':'password'}}" title="手机号" disabled i-class="mb"/>-->
+        <i-input value="{{ user.telephone }}"  title="手机号" disabled i-class="mb"/>
+        <i-input value="{{ user.webchat }}" wx:if="{{ user.webchat }}"  title="微信号" disabled i-class="mb"/>
+        <i-input value="{{ user.qq }}" wx:if="{{ user.qq }}"  title="QQ号" disabled i-class="mb"/>
+        <i-input value="{{ user.personProfile }}" wx:if="{{ user.personProfile }}" type="textarea" title="个人简介" disabled i-class="mb"/>
+        <!--<i-input value="{{ user }}" title="用户信息" disabled />-->
+
+        <view class="panel" style="">学校信息</view>
+        <i-input value="{{ user.schoolName }}" title="学校" disabled i-class="mb"/>
+        <i-input value="{{ user.education }}" title="学历" disabled i-class="mb"/>
+        <i-input value="{{ user.inShool +'年'}}" title="入学时间" disabled i-class="mb"/>
+        <i-input value="{{ user.outShool +'年'}}" title="毕业时间" disabled i-class="mb"/>
+        <i-input value="{{ user.depart}}" title="院(系)" disabled i-class="mb"/>
+        <i-input value="{{ user.major}}" title="专业" disabled i-class="mb"/>
+        <i-input value="{{ user.userClass}}" wx:if="{{ user.userClass}}" title="班级" disabled i-class="mb"/>
+        <i-input value="{{ user.studentNo}}" wx:if="{{ user.studentNo}}" title="学号" disabled i-class="mb"/>
+        <i-input value="{{ user.masterTutor}}" wx:if="{{ user.masterTutor}}" title="硕导" disabled i-class="mb"/>
+        <i-input value="{{ user.doctorTutor}}" wx:if="{{ user.doctorTutor}}" title="博导" disabled i-class="mb"/>
+        <!--<i-input value="{{ user.personProfile }}" type="textarea" title="个人简介" disabled i-class=""/>-->
+        <!--<i-input value="{{ user }}" title="用户信息" disabled />-->
+        <view wx:if="{{ user.workLocation||user.industryDirection||user.currentCompany||user.job}}" class="panel">
+            工作信息
+        </view>
+        <i-input value="{{ user.workLocation }}" wx:if="{{ user.workLocation }}" title="工作城市" disabled i-class="mb"/>
+        <i-input value="{{ user.industryDirection }}" wx:if="{{ user.industryDirection }}" title="行业方向" disabled
+                 i-class="mb"/>
+        <i-input value="{{ user.currentCompany }}" wx:if="{{ user.currentCompany }}" title="所在公司" disabled
+                 i-class="mb"/>
+        <i-input value="{{ user.job }}" wx:if="{{ user.job }}" title="职务" disabled i-class="mb"/>
+
+        <view wx:if="{{check}}" style="display: flex;justify-content: space-around">
+            <!--<view class="danger-button"  catchtap="handleClick" data-id="{{item.userId}}">拒绝</view>-->
+            <view class="warning-button"  catchtap="showEdit" >需修改</view>
+            <view class="primary-button"   catchtap="checkSuccess"  >通过</view>
+        </view>
+
+    </view>
+
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>
+
+<i-modal title="需修改" visible="{{showEdit}}" bind:ok="handleEditOk" bind:cancel="handleEditCancel">
+    <view style="width: 100%;padding: 20rpx;box-sizing: border-box">
+        <textarea wx:if="{{showEdit}}" style="width: 100%;height: 100rpx;" bindinput="changeNeedEdit"  value="{{needEdit}}" placeholder="请输入需要修改的内容" ></textarea>
+    </view>
+</i-modal>

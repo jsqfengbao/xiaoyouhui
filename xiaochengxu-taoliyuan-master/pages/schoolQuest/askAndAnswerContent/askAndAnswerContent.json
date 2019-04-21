@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "问题详情",
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index"
+  }
+}

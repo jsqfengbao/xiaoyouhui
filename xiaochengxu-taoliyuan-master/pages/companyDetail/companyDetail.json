@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "企业详情",
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index"
+  }
+}

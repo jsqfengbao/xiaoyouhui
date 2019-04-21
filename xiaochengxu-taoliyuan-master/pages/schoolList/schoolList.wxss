@@ -1,0 +1,17 @@
+/**index.wxss**/
+
+.banner{
+  /* height: 260rpx; */
+  width: 100%;
+
+}
+.banner image{
+  height: 100%;
+  width: 100%;
+}
+.friend_list view{
+  height: 49px;
+  line-height: 49px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}

@@ -1,0 +1,211 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": false,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.0",
+	"appid": "wx2cda45f236177104",
+	"projectname": "%E6%A1%83%E6%9D%8E%E5%9B%AD%E6%96%B0%E6%8E%A5%E5%8F%A3",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 26,
+			"list": [
+				{
+					"id": -1,
+					"name": "homepage",
+					"pathName": "pages/homepage/homepage",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "schoolCompany",
+					"pathName": "pages/schoolCompany/schoolCompany",
+					"query": ""
+				},
+				{
+					"id": 6,
+					"name": "personInfo",
+					"pathName": "pages/myinfo/personInfo/personInfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "bindCellphone",
+					"pathName": "pages/myinfo/bindCellphone/bindCellphone",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "workInfo",
+					"pathName": "pages/myinfo/workInfo/workInfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "schoolInfo",
+					"pathName": "pages/myinfo/schoolInfo/schoolInfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "about",
+					"pathName": "pages/about/about",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "selectInfo",
+					"pathName": "pages/myinfo/selectInfo/selectInfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "selectInfo",
+					"pathName": "pages/myinfo/selectInfo/selectInfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "openPhone",
+					"pathName": "pages/myinfo/openPhone/openPhone",
+					"query": ""
+				},
+				{
+					"id": 16,
+					"name": "定位",
+					"pathName": "pages/schoolFellow/schoolFellow",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "personInfo",
+					"pathName": "pages/myinfo/myinfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "schoolFellow",
+					"pathName": "pages/schoolFellow/schoolFellow",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "my",
+					"pathName": "pages/myinfo/myinfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "alumniList",
+					"pathName": "pages/alumniList/alumniList",
+					"query": "schoolAreaId=2"
+				},
+				{
+					"id": -1,
+					"name": "/personalInfo",
+					"pathName": "pages/personalInfo/personalInfo",
+					"query": "userId=49"
+				},
+				{
+					"id": -1,
+					"name": "/activity",
+					"pathName": "pages/activity/activity",
+					"query": "userId=49"
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "baseInfo",
+					"pathName": "pages/baseInfo/baseInfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "schoolInfo",
+					"pathName": "pages/schoolInfo/schoolInfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "activityDetail",
+					"pathName": "pages/activityDetail/activityDetail",
+					"query": "activityId=13"
+				},
+				{
+					"id": -1,
+					"name": "checkList",
+					"pathName": "pages/checkList/checkList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "showMap",
+					"pathName": "pages/showMap/showMap",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "/inviteList",
+					"pathName": "pages/inviteList/inviteList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "inviteList",
+					"pathName": "pages/inviteList/inviteList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 26,
+					"name": "newsDetail",
+					"pathName": "pages/newsDetail/newsDetail",
+					"query": "newsID=9",
+					"scene": null
+				}
+			]
+		}
+	}
+}

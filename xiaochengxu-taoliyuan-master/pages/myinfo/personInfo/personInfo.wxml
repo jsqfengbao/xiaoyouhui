@@ -1,0 +1,68 @@
+<view class="page" >
+  <view class="page__bd">
+    <view class="weui-cells__title">基本信息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd" style='width:195rpx;'>
+          <view class="weui-label">姓名<text class='important'>*</text></view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入姓名" bindblur="userNameInput" value="{{userData.NAME}}"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd" style='width:195rpx;'>
+          <view class="weui-label">手机号码<text class='important'>*</text></view>
+        </view>
+        <view  class="weui-cell__bd"   style='display:flex;'>
+            <input class="weui-input" disabled="true" placeholder="请输入手机号码" style='display:inline-block;flex:1;' catchtap='changePhone' value="{{userData.telephone}}" type="{{checkBox?'password':'number'}}"></input>
+             <checkbox-group catchchange="radioChange" >
+                 <checkbox wx:if="{{userData.telephone}}" value='0' checked='{{checkBox}}' class="weui-input" style="font-size:36rpx">隐藏</checkbox>
+             </checkbox-group>
+            
+        </view>
+        <!-- <view wx:else>
+           <input class="weui-input" disabled="true" placeholder="手机号码" bindblur="userPhoneInput" value="{{userData.isShowMobile==1?userData.telephone:'......'}}" catchtap='openPhone'></input>
+        </view> -->
+        <!-- <view wx:elif="{{userData.FIRST_MOBILE && userData.FIRST_MOBILE_STATUS ==1}}">
+        <input class="weui-input" disabled="true" placeholder="手机号码" bindblur="userPhoneInput" value="{{userData.FIRST_MOBILE}}"></input>
+        </view>
+         <view wx:elif="{{userData.FIRST_MOBILE && userData.FIRST_MOBILE_STATUS ==0}}">
+        <input class="weui-input" disabled="true" placeholder="手机号码" bindblur="userPhoneInput" value="******"></input>
+        </view> -->
+       </view>
+
+      <!-- <view class="weui-cell weui-cell_input" wx:if="{{userData.SECOND_MOBILE}}" > -->
+        <!-- <view class="weui-cell__hd">
+          <view class="weui-label">手机号码</view>
+        </view> -->
+        <!-- 显示第二个手机号码 -->
+      <!-- <view class="weui-cell__bd"  catchtap='changePhone'>
+         <input class="weui-input" disabled="true" placeholder="手机号码" bindblur="userPhoneInput" value="{{userData.SECOND_MOBILE}}"></input>
+        </view>  -->
+    <!-- </view> -->
+
+
+
+      <view class="weui-cell weui-cell_input" catchtap='changeAbstract'>
+        <view class="weui-cell__hd" style='width:195rpx;'>
+          <view class="weui-label">个人简介</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view class="weui-input weui-cell__ft_in-access">
+            <input class="weui-input" disabled="true" placeholder="如需修改请点击" ></input>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="topic-desc" wx:if="{{userData.INTRODUCTION}}">
+        <view class="topic-input">
+        <textarea type='text' name='new_value' value='{{userData.INTRODUCTION}}'></textarea>
+      </view>
+    </view>
+  </view>
+  <button type="defaule" bindtap="submintData">提交数据</button> 
+  <!-- <loading hidden="{{hidden}}">
+    提交中...
+  </loading>-->
+</view>

@@ -1,0 +1,27 @@
+<view class="container">
+    <view class="topic-detail">
+        <view class="topic-owner">
+            <text class="topic-title">{{AACDetail.TITLE}}</text>
+        </view>
+        <view class="topic-desc">
+            <view>
+                <text class="topic-info">提问时间：{{AACDetail.ASK_TIME}}</text>
+            </view>
+            <text>{{AACDetail.CONTENT}}</text>
+        </view>
+        <view class="topic-main">
+            <view>
+                <text class="topic-info">回答时间：{{AACDetail.ANSWER_TIME}}</text>
+            </view>
+            <text>{{AACDetail.ANSER}}</text>
+        </view>
+    </view>
+    <loading hidden="{{hidden}}">
+        加载中...
+    </loading>
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

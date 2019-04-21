@@ -1,0 +1,15 @@
+<view class="container">
+    <block wx:for="{{companyList}}">
+        <view class="list-item" data-id="{{item.id}}" catchtap="toDetail">
+            {{item.companyName}}
+        </view>
+
+    </block>
+    <i-load-more tip="{{tip}}" loading="{{ loadMore }}"/>
+</view>
+
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

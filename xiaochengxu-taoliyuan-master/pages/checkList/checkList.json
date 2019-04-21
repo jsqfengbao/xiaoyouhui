@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "审核列表",
+  "usingComponents": {
+    "i-button": "../../dist/button/index"
+  }
+}

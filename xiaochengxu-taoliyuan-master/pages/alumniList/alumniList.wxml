@@ -1,0 +1,56 @@
+<view class="container">
+    <view catchtap="toAlumniAdminList" style="display: flex;align-items: center;justify-content: space-between;margin: 10rpx;padding: 10rpx;border-bottom: 1px solid #dddee1">
+        <view style="color: #2d8cf0" >各地校友会联系人</view>
+        <view class="right-arrow"></view>
+    </view>
+
+    <view class="xiaoyou-top">目前共有{{totalCount}}位校友的信息</view>
+
+    <view style="display: flex;flex-direction: row;padding:10rpx 20rpx;margin:0 20rpx;">
+        <input bindinput="changeSearchName" value="{{searchName}}" type="text" placeholder="请输入校友姓名" style="width: 100%;height: 100%;padding: 10rpx 0 10rpx 20rpx;border: 1px solid #2d8cf0"/>
+        <view bind:tap="toAlumniSearch" style="flex-shrink: 0;padding: 10rpx 20rpx ;background: #2d8cf0;color: #fff;">搜索</view>
+    </view>
+
+    <block wx:for="{{alumniList}}">
+        <view style="display: flex;border-radius: 10rpx;border: 1px solid #dddee1;padding: 20rpx;margin: 20rpx;font-size: 30rpx;">
+            <image data-url="{{item.avatar?item.avatar:defaultImage}}" bind:tap="previewImg"
+                   src='{{item.avatar?item.avatar:defaultImage}}'></image>
+
+            <view style="display: flex;flex-direction: column;flex-grow: 1;margin-left: 20rpx;justify-content: space-between" bind:tap="toPersonalInfo" data-uid="{{item.userId}}">
+                <view style="display: flex;justify-content: space-between">
+                    <view style="color:#2d8cf0;">{{item.name}}</view>
+                    <view wx:if="{{item.distance!='没有定位'}}">
+                        {{item.distance}}
+                        <text style="color:#80848f;">公里</text>
+                    </view>
+                    <view wx:else>
+                        {{item.distance}}
+                    </view>
+                </view>
+
+                <view style="border-bottom: 1px solid #e9eaec;width: 100%"></view>
+
+                <view>
+                    <text style="margin-right: 20rpx">{{item.inSchool}}级</text>
+                    <text style="margin-right: 20rpx">{{item.education}}</text>
+                    <text>{{item.depart}}</text>
+                </view>
+            </view>
+        </view>
+    </block>
+
+
+    <view class="to-map">
+        <image src="/images/map-icon.png" style='width:158rpx; height:158rpx;' catchtap="showMap"></image>
+    </view>
+
+    <i-load-more tip="{{tip}}" loading="{{ loadMore }}"/>
+
+    <view wx:if="{{search}}" style="text-align: center;position:relative;top:-50rpx;font-size: 24rpx">下拉页面查看分会校友</view>
+
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

@@ -1,0 +1,80 @@
+<view class="container">
+    <image style="width: 100%;height: 400rpx;" src="{{detail.activityLogo+'?x-oss-process=image/resize,m_fill,w_750,h_400,limit_0/auto-orient,1/quality,q_90'}}"></image>
+    <view class="list-item">
+        <view class="label">活动名称:</view>
+        <view>{{detail.title}}</view>
+    </view>
+
+    <view class="list-item">
+        <view class="label">活动时间:</view>
+        <view>{{detail.activityTime}}</view>
+    </view>
+    <view class="list-item">
+        <view class="label">活动地点:</view>
+        <view>{{detail.activityPlace}}</view>
+    </view>
+
+    <view class="list-item">
+        <view class="label">联系人员:</view>
+        <view>{{detail.linkName}}</view>
+    </view>
+    <view class="list-item" style="border-bottom: 0">
+        <view class="label">联系电话:</view>
+        <view>{{detail.linkTelephone}}</view>
+        <view class="call" catchtap="calling" data-phone_num="{{detail.linkTelephone}}">点击拨打</view>
+    </view>
+
+    <view style="background-color: #f8f8f9;height: 20rpx;width: 100%"></view>
+    <view class="list-item">
+        <view class="label">活动内容</view>
+    </view>
+    <!--<view style="padding:0 20rpx;" class="topic-desc-rich">-->
+        <!--<rich-text  nodes="{{detail.content}}"></rich-text>-->
+    <!--</view>-->
+
+    <view style="padding:0 20rpx;" wx:if="{{detail.content}}">
+        <diy-rich-text InRichTextData="{{detail.content}}" />
+    </view>
+
+    <block wx:if="{{users.length>0}}">
+        <view class="list-item">
+            <view class="label">报名用户</view>
+        </view>
+        <view style="padding:0 20rpx;padding-bottom: 100rpx;display: flex;flex-wrap: wrap" >
+            <view wx:for="{{users}}" style="display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 10rpx 0">
+                <image style="height: 80rpx;width:80rpx;border-radius: 80rpx" src="{{item.avatar?item.avatar:'/images/default.png'}}"></image>
+                <view style="font-size: 24rpx">{{item.name}}</view>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view style="padding-bottom: 100rpx"> </view>
+    </block>
+
+    <view style="position: fixed;bottom: 0;display: flex;background: #fff;height: 100rpx;width: 100%;border-top: 1px solid #dddee1">
+        <!--<button open-type="share" class="open" style="display: flex;flex-direction: column;justify-content: center;align-items: center;width: 80rpx;color: #0bb20c;line-height: 40rpx">-->
+            <!--<view class="iconfont icon-fenxiang"></view>-->
+            <!--<view style="font-size: 28rpx">分享</view>-->
+        <!--</button>-->
+        <view bind:tap="join" data-id="{{detail.id}}" style="flex-grow: 1;background: {{buttonColor}};text-align: center;align-items: center;line-height: 100rpx;color: #fff">
+            {{buttonText}}
+        </view>
+    </view>
+
+    <view style="position: fixed;bottom: 100rpx;right:20rpx;display: flex;height: 210rpx;flex-direction: column">
+        <button open-type="share" class="open" style="display: flex;flex-direction: column;justify-content: center;align-items: center;width: 100rpx;color: #fff;line-height: 100rpx;border-radius: 100rpx;background: #0bb20c;opacity: 0.8">
+            <view class="iconfont icon-fenxiang" style="font-size: 40rpx"></view>
+            <!--<view style="font-size: 28rpx">分享</view>-->
+        </button>
+        <button bindtap="toHome" class="open" style="display: flex;flex-direction: column;justify-content: center;align-items: center;width: 100rpx;color: #fff;line-height: 100rpx;border-radius: 100rpx;background: #2d8cf0;opacity: 0.8;margin-top: 2rpx">
+            <view class="iconfont icon-shouye" style="font-size: 40rpx"></view>
+            <!--<view style="font-size: 28rpx">分享</view>-->
+        </button>
+    </view>
+
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

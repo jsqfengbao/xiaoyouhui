@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "学校首页",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "i-load-more": "../../dist/load-more/index"
+  }
+}

@@ -1,0 +1,7 @@
+/* pages/about/about.wxss */
+.font{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

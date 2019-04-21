@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "校友动态",
+  "usingComponents": {
+    "i-input": "../../dist/input/index",
+    "diy-rich-text": "../../components/richTextDIY/richTextDIY"
+  }
+}

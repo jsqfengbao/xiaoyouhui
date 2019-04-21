@@ -1,0 +1,22 @@
+<!--AskPages.wxml-->
+<view class="container">
+  <form bindsubmit="formSubmit">
+    <view class="topic-main">
+      <view class="topic-input">
+        <input type='text' name='name' placeholder='请输入您的姓名' value='{{title_str}}'/>
+      </view>
+      <view class="topic-textarea">
+        <textarea type='text' name='question_content' placeholder='请输入您建议，稍后我们会电话联系您' value="{{content_str}}"></textarea>
+      </view>
+      <view class="topic-input">
+        <input type='text' name='phone_num' placeholder='请输入联系您的电话' value="{{phoneNum}}"/>
+      </view>
+    </view>
+    <view class="topic-button">
+      <button formType="submit">提交建议</button>
+    </view>
+  </form>
+  <loading hidden="{{hidden}}">
+    提交中...
+  </loading>
+</view>

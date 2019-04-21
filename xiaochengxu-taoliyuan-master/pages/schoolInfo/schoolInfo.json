@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "学校信息",
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index"
+  }
+}

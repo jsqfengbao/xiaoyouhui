@@ -1,0 +1,24 @@
+<view class="container">
+    <view style="margin: 20rpx">
+        <block wx:for="{{activityList}}">
+            <view bind:tap="toDetail" data-id="{{item.id}}" style="width: 100%;display: flex;margin:20rpx 0;border-bottom: 1px solid #dddee1;padding-bottom: 20rpx">
+
+                <image style="width: 220rpx;height: 180rpx;flex-shrink:0;border-radius: 10rpx;" src="{{item.activityLogo + '?x-oss-process=image/resize,m_fill,w_220,h_180,limit_0/auto-orient,1/quality,q_90'}}"></image>
+
+                <view style="display: flex;flex-direction: column;flex-grow: 1;overflow-x: hidden;margin-left: 20rpx">
+                    <view class="no-wrap" style="font-size: 30rpx;color: #1c2438;">{{item.title}}</view>
+                    <view class="no-wrap" style="margin-top: 10rpx"><text class="iconfont icon-dizhi"></text>{{item.activityPlace}}</view>
+                    <view class="no-wrap" style=" "><text class="iconfont icon-shijian"></text>{{item.activityTime}}</view>
+                    <view class="no-wrap" style=""><text class="iconfont icon-gerenzhongxinwoderenwubiaozhuntoumianxing-copy"></text>{{item.linkName}}</view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <i-load-more tip="{{tip}}" loading="{{ loadMore }}"/>
+</view>
+
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

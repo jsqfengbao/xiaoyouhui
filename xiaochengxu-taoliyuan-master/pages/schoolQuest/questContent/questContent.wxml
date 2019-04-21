@@ -1,0 +1,27 @@
+<!--AskPages.wxml-->
+<view class="container">
+    <form bindsubmit="formSubmit">
+        <view class="topic-main">
+            <view class="topic-input">
+                <input type='text' name='name' placeholder='请输入您要提问的标题'/>
+            </view>
+            <view class="topic-textarea">
+                <textarea type='text' name='question_content' placeholder='请输入您要提问的内容'></textarea>
+            </view>
+            <view class="topic-input">
+                <input type='text' name='phone_num' placeholder='请输入联系您的电话'/>
+            </view>
+        </view>
+        <view class="topic-button">
+            <button formType="submit">提交提问</button>
+        </view>
+    </form>
+    <loading hidden="{{hidden}}">
+        提交中...
+    </loading>
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

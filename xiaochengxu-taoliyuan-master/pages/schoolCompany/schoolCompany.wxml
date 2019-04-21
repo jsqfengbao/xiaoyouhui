@@ -1,0 +1,24 @@
+<!--.wxml-->
+<scroll-view scroll-y="true" bindscroll="scroll" style='height:449px;' bindscrolltolower="top"  class="container">
+  <view class="topic-main">
+      <block wx:for="{{AAList}}" wx:key="item">
+        <view class="topic-item" index="{{index}}" id="{{item.id}}" catchtap="redictDetail">
+            <view class="topic-info">
+                <view class="topic-inner">
+                    <view class="topic-left">
+                        <view class="topic-title"><text>{{item.companyName}}</text></view>
+                        <view >
+                            <text class="node-name">{{item.description}}</text>
+                            <text class="member-nickname">{{item.createTime?item.createTime:''}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+      </block>
+  </view>
+  <text wx:if="{{AAList.length==0}}">无数据加载...</text>
+  <loading hidden="{{hidden}}">
+    加载中...
+  </loading>
+</scroll-view>

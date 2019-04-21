@@ -1,0 +1,37 @@
+<view class="container">
+  <view class="topic-detail">
+    <view class="topic-owner">
+      <view class="topic-title">{{AACDetail.companyName}}</view>
+    </view>
+    <view class="topic-info">
+    <!-- 没有时间的参数 -->
+      <!-- <text>{{AACDetail.PUBLISH_TIME}}</text>   -->
+      <text class="topic-created">桃李园</text>
+    </view>
+    <view class="topic-desc">
+      <text>{{AACDetail.content}}</text>
+    </view>
+  </view>
+  <view class="replies">
+    <block>
+      <view wx:if="{{AACDetail.link1Name}}">
+        <view class="topic-desc">
+           <view>联系人员： {{AACDetail.link1Name}}</view>
+           <view>联系电话： <text class="contract_tel" catchtap="calling" data-phone_num="{{AACDetail.link1Telephone}}">{{AACDetail.link1Telephone}}</text></view>
+          
+        </view>
+      </view>
+      <view wx:if="{{AACDetail.link2Name}}">
+        <view class="topic-desc">
+           <view>联系人员： {{AACDetail.link2Name}}</view>
+           <view>联系电话： <text class="contract_tel" catchtap="calling" data-phone_num="{{AACDetail.link1Telephone}}">{{AACDetail.link2Telephone}}</text></view>
+          
+        </view>
+      </view>
+     
+    </block>
+  </view>
+  <!-- <loading hidden="{{hidden}}">
+    加载中...
+  </loading> -->
+</view>

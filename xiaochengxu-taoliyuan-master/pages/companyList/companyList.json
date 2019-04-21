@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "校友企业",
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index",
+    "i-load-more": "../../dist/load-more/index"
+  }
+}

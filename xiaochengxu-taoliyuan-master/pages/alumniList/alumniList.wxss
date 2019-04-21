@@ -1,0 +1,50 @@
+/* pages/alumniList/alumniList.wxss */
+image {
+    width: 108rpx;
+    height: 108rpx;
+    vertical-align: middle;
+    border-radius: 8rpx;
+}
+
+.mt40 {
+    margin: 20rpx 0;
+}
+
+.xiaoyou-ft {
+    font-size: 30rpx;
+}
+
+.xiaoyou-juli {
+    color: #6e48aa;
+}
+
+.xiaoyou-ruxue view {
+    margin-right: 20rpx;
+}
+
+.xiaoyou-top {
+    padding: 20rpx;
+    font-size: 26rpx;
+    color: #999;
+}
+
+
+.person_imag{
+    height:112rpxpx;
+    width:112rpx;
+    padding-right: 20rpx;
+}
+.head_image{
+    flex: 1;
+
+}
+.line{
+    /* line-height:24rpx; */
+}
+.fontClass{
+    flex: 3;
+    display: flex;
+    flex-flow: column;
+    height:132rpx;
+
+}

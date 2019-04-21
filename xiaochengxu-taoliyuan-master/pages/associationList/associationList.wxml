@@ -1,0 +1,66 @@
+<!--pages/datalist/datalist.wxml-->
+<view class="container">
+
+    <view style="padding:30rpx 50rpx;display: flex;justify-content: start;border-bottom: 1px solid #ccc" wx:if="{{mine}}" id="{{mine.schoolId}}" catchtap='toAlumniList'>
+        <view  >
+            <text>所在分会：</text>
+            <text class="blue">{{mine.schoolName}}</text>
+        </view>
+        <i-icon type="enter" />
+    </view>
+    <!--<view style="padding: 20rpx">
+        <block wx:for="{{datalist}}" wx:for-index='index'>
+            <block wx:if="{{item.regionValue.length==1}}">
+                <view class='common item' id='{{item.regionValue[0].schoolId}}' catchtap='toAlumniList'>
+                    <view>{{item.regionValue[0].schoolName}}</view>
+                    <i-icon type="enter" />
+                </view>
+            </block>
+            <block wx:else>
+                <i-collapse name="{{name}}" i-class="collapse-padding">
+                    <i-collapse-item title="{{item.regionName}}" name="{{item.regionName}}">
+                        <view slot="content">
+                            <view style='background:#fff;' wx:for="{{item.regionValue}}" wx:for-item="item2">
+                                <view class='common item' id='{{item2.schoolId}}' catchtap='toAlumniList'>
+                                    <view>{{item2.schoolName}}</view>
+                                    <i-icon type="enter" />
+                                </view>
+                                &lt;!&ndash;<i-icon type="activity" size="28" color="#80848f" />&ndash;&gt;
+
+                            </view>
+                        </view>
+                    </i-collapse-item>
+                </i-collapse>
+            </block>
+        </block>
+    </view>-->
+
+
+    <view style="padding:0 20rpx ">
+        <block wx:for="{{datalist}}" wx:for-index='index'>
+            <view style="padding: 30rpx;border-bottom: 1px solid #ccc">
+                <view id="{{index}}" bind:tap="showDetail" style="display: flex">
+                    <view>{{item.regionName}}</view>
+                    <view>
+                        <i-icon wx:if="{{!item.show}}" type="enter" />
+                        <i-icon wx:else type="unfold" />
+                    </view>
+                </view>
+                <view wx:if="{{item.show}}" style='background:#fff;' wx:for="{{item.regionValue}}" wx:for-index="index2" wx:for-item="item2">
+                    <view style="{{index2==(item.regionValue.length-1)?'padding:30rpx 30rpx 0 30rpx;':'border-bottom: 1px solid #ccc;padding:30rpx;'}}display:flex;" id='{{item2.schoolId}}' catchtap='toAlumniList'>
+                        <view>{{item2.schoolName}}</view>
+                        <i-icon type="enter" />
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <view class="to-map">
+        <image src="/images/map-icon.png" style='width:158rpx; height:158rpx;' catchtap="showMap"></image>
+    </view>
+</view>
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

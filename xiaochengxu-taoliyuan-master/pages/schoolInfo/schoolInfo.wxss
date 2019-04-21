@@ -1,0 +1,36 @@
+
+button{
+  background: #007fff;
+  color: #fff;
+  height:90rpx;
+  line-height:90rpx;
+  margin-top:20rpx;
+  margin-bottom: 20rpx;
+width:90%;
+}
+
+.picker{
+  padding: 26rpx;
+  width: 100%;
+  background-color: #FFFFFF;
+}
+checkbox-group{
+  margin-bottom:20rpx;
+  margin-top:20rpx;
+}
+checkbox{
+  display:inline-block;
+  width:44%;
+
+}
+.important{
+   color:red;
+   font-size:32rpx;
+}
+.showColor{
+  color:#555;
+}
+
+.label{
+  width: 160rpx;
+}

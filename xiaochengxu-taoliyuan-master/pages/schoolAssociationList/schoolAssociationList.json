@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "校友分会",
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index",
+    "i-collapse": "../../dist/collapse/index",
+    "i-collapse-item": "../../dist/collapse-item/index",
+    "i-icon": "../../dist/icon/index"
+  }
+}

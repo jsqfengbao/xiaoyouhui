@@ -1,0 +1,25 @@
+<view class="page bindPhone-wrap" id="bindPhonePage" data-router="bindPhonePage">
+    <view class="bind-new-tel-wrap">
+        <view class="verify-row" style="border-bottom: 1px solid #e5e5e5;">
+            <label class="item-name">手机号</label><input class="code-tel" bindinput="inputPhone" placeholder="请输入手机号"
+                                                       maxlength='11'/>
+        </view>
+        <view class="verify-row">
+            <label class="item-name">验证码</label><input bindinput="inputNewCode" placeholder="请输入验证码"/><label
+                class="get-code-btn" catchtap="sendCodeToNewPhone">{{ newCodeStatus }}</label>
+        </view>
+        <label class="option-btn bind-new-tel-btn {{ !newPhone || !newCode ? 'disabled' : '' }}"
+               catchtap="bindNewPhone">绑定手机</label>
+
+    </view>
+
+    <loading hidden="{{hidden}}">
+        提交中...
+    </loading>
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>
+

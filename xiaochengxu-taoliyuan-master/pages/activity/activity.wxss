@@ -1,0 +1,24 @@
+.container { padding: 30rpx;}
+.topic-owner { display: flex; align-items: center; margin-bottom: 20rpx;}
+.owner-avatar { width: 128rpx; height: 128rpx; margin-right: 30rpx; border-radius: 100%;}
+.topic-created { margin-left: 30rpx; font-size: 30rpx; color: #ccc;}
+.topic-title { flex: 1; box-sizing: border-box; line-height: 1.4; color: #333; align-content: center; font-size:36rpx;
+ text-align: justify}
+.topic-info { margin-bottom: 20rpx; color: #ccc;}
+.topic-desc { border-bottom: 1px solid #e5e5e5; padding-bottom: 20rpx;  word-wrap: break-word; word-break: normal;  text-align: justify; color: #495060;}
+.replies { margin-top: 30rpx; border-top: 1px solid rgb(19, 4, 4);}
+.replies-item { padding: 40rpx 0; border-bottom: 1px solid #eee;}
+.reply-owner { display: flex; align-items: center; margin-bottom:20rpx;}
+.reply-avatar { width: 100rpx; height: 100rpx; border-radius: 100%; margin-right: 30rpx;}
+.reply-name, .reply-time, .reply-content { text-align:justify;
+
+ color: #999;}
+.reply-time { margin-left: 30rpx; color: #ccc;}
+.reply-content { padding: 0 20rpx; line-height: 1.4; word-wrap: break-word; word-break: normal; color: #999;}
+.contract_tel { color:#007fff; font-size: 40;}
+.topic-main{padding: 20rpx 0; font-size: 30rpx; }
+.topic-detail{margin-bottom:20rpx;}
+.no-text{
+  text-align: center;
+  font-size: 32rpx;
+}

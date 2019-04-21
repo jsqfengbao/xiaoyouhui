@@ -1,0 +1,51 @@
+<view class="container">
+
+    <swiper style="height: 422rpx;width: 100%"
+            indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}"
+            vertical="{{vertical}}"
+            interval="{{interval}}" duration="{{duration}}" vertical='{{vertical}}'>
+        <block wx:for="{{background}}" wx:key="*this">
+            <swiper-item>
+                <image style="height: 422rpx;width: 100%" class="" src='{{item}}'></image>
+            </swiper-item>
+        </block>
+    </swiper>
+
+    <view style="display: flex;justify-content: space-around;padding: 20rpx">
+        <block wx:for-items="{{navList}}">
+            <view>
+                <view style="display: flex;flex-direction: column;justify-content: space-around;align-items: center;margin: 20rpx">
+                    <image style="width: 86rpx;height: 86rpx;" src="{{item.src}}" catchtap="{{item.func}}"></image>
+                    <view style="font-size: 24rpx;margin-top: 8rpx;color: #495060" class="placeholder">{{item.title}}</view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <view class="index-top" style="font-size: 30rpx;color: #1c2438">校友动态</view>
+
+    <block wx:for-items="{{mainNewsList}}">
+        <view style="margin: 15rpx">
+            <view style="display: flex;padding: 0rpx 15rpx 15rpx 15rpx;border-bottom: 1px solid #e9eaec"
+                  index="{{index}}" id="{{item.id}}" catchtap="toNewsDetail">
+                <image src="{{item.activityLogo+'?x-oss-process=image/resize,m_fill,w_220,h_180,limit_0/auto-orient,1/quality,q_90'}}"
+                       style="width: 220rpx;height: 180rpx;flex-shrink:0;border-radius: 10rpx;"></image>
+                <view style="display: flex;flex-direction: column;margin-left: 20rpx;justify-content: space-between;flex-grow:1">
+                    <view class="title" style="">{{item.title}}</view>
+                    <view class="sub-title" style="">
+                        <view>{{item.author}}</view>
+                        <view>{{item.activityTime}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <i-load-more tip="{{tip}}" loading="{{ loadMore }}"/>
+
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

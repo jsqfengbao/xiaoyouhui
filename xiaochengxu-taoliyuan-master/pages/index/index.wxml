@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='banner' style='height:{{bannerHeigh}}px;'>
+    <image src='../../images/banner.jpg'></image>
+  </view>
+  <!-- 校友会类别开始 -->
+  <scroll-view scroll-y="true" bindscroll="scroll" style='height:449px;' bindscrolltolower="top" class="friend_list">
+      <!-- <view class="friend_list"> -->
+        <block wx:for="{{school_list}}">
+          <view data-schoolid="{{item.id}}" bindtap='next'>{{item.schoolName}}</view>
+        </block>
+      <!-- </view> -->
+  </scroll-view>
+  
+ 
+</view>

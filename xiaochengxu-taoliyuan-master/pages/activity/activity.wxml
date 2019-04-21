@@ -1,0 +1,19 @@
+<!-- <view class="container"> -->
+<scroll-view scroll-y="true" bindscroll="scroll" style='height:449px;' bindscrolltolower="top" class="container">
+    <block wx:for="{{activityList}}" wx:key="item">
+      <view class="topic-detail"  id="{{item.id}}" catchtap="ActivityDetails">
+        <view class="topic-owner">
+          <text class="topic-title">{{item.title}}</text>
+        </view>
+        <view class="topic-desc">
+          <view>
+            <text class="topic-info"> {{item.activityTime}}</text>
+          </view>
+        </view>
+      </view>
+      </block>
+      <text wx:if="{{activityList.length==0}}">无数据加载...</text>
+      <loading hidden="{{hidden}}">
+        加载中...
+      </loading>
+</scroll-view>

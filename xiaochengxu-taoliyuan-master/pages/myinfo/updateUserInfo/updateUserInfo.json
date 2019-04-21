@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "修改个人信息",
+  "usingComponents": {
+    "i-modal": "../../../dist/modal/index"
+  }
+}

@@ -1,0 +1,38 @@
+<view class="container">
+    <view style="display:flex">
+        <button catchtap="askAQuestion">我要提问题</button>
+    </view>
+    <view class="topic-main" wx:if="{{hotest}}">
+        <block wx:for="{{hotest}}" wx:key="key">
+            <view class="topic-item" index="{{index}}" id="{{item.ID}}" bindtap='answarContent'>
+                <view class='cancel' bindtap='cancel' data-id="{{item.ID}}" id="{{item.ID}}">
+                    <image src='../../images/cancel.png'></image>
+                </view>
+                <view class="topic-info">
+                    <view class="topic-inner">
+                        <view class="topic-left">
+                            <view class="topic-title">
+                                <text>{{item.TITLE}}</text>
+                            </view>
+                            <view class="member-nickname">
+                                <view class="node-name">{{item.CONTENT}}</view>
+                                <view>
+                                    <text>{{item.ASK_TIME}}</text>
+                                    <icon type="success" wx:if="{{item.ANSWERFLAG==1}}" size="14"/>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <!-- <loading hidden="{{hidden}}">
+      加载中...
+    </loading> -->
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

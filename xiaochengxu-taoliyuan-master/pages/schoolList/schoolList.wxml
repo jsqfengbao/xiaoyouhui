@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+    <view class='banner' style='height:{{bannerHeigh}}px;'>
+        <image src='../../images/banner.jpg'></image>
+    </view>
+    <!-- 校友会类别开始 -->
+    <view class="friend_list">
+        <block wx:for="{{schoolList}}">
+            <view data-schoolid="{{item.id}}" bindtap='next'>{{item.schoolName}}<text style="color: red">(点击选择分会)</text></view>
+        </block>
+    </view>
+
+    <!--todo 只有一个学校暂时先注释-->
+    <!--<i-load-more tip="{{tip}}" loading="{{ loadMore }}"/>-->
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>

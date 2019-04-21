@@ -1,0 +1,22 @@
+<view class="container">
+    <block wx:for="{{adminList}}">
+        <view style="display: flex;flex-direction: column">
+            <view style="color: #2d8cf0;font-size: 34rpx">
+                {{item.schoolName}}
+            </view>
+
+            <view class="topic-desc" wx:if="{{item.adminName}}">
+                <view>联系人员： {{item.adminName}}</view>
+                <view style="display: flex;">
+                    <view>联系电话： {{item.adminPhone}}</view>
+                    <view class="call" catchtap="calling" data-phone_num="{{item.adminPhone}}">点击拨打</view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <i-load-more tip="{{tip}}" loading="{{ loadMore }}"/>
+
+</view>
+
+

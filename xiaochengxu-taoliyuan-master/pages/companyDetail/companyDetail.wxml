@@ -1,0 +1,45 @@
+<view class="container">
+
+    <view style="font-size: 34rpx;text-align: center;margin-top: 20rpx">{{detail.companyName}}</view>
+
+    <view class="list-item">
+        <view class="label">公司简介</view>
+    </view>
+    <view style="padding: 0 20rpx">
+        <rich-text nodes="{{detail.content}}"></rich-text>
+    </view>
+
+
+    <view style="background-color: #f8f8f9;height: 20rpx;width: 100%"></view>
+
+
+    <block wx:if="{{detail.link1Name && detail.link1Telephone}}">
+        <view class="list-item">
+            <view class="label">联系人员:</view>
+            <view>{{detail.link1Name}}</view>
+        </view>
+        <view class="list-item">
+            <view class="label">联系电话:</view>
+            <view>{{detail.link1Telephone}}</view>
+            <view class="call" catchtap="calling" data-phone_num="{{detail.link1Telephone}}">点击拨打</view>
+        </view>
+    </block>
+
+    <block wx:if="{{detail.link2Name && detail.link2Telephone}}">
+        <view class="list-item">
+            <view class="label">联系人员:</view>
+            <view>{{detail.link2Name}}</view>
+        </view>
+        <view class="list-item">
+            <view class="label">联系电话:</view>
+            <view>{{detail.link2Telephone}}</view>
+            <view class="call" catchtap="calling" data-phone_num="{{detail.link2Telephone}}">点击拨打</view>
+        </view>
+    </block>
+
+</view>
+
+<i-modal title="{{modalTitle}}" show-cancel="{{showCancel}}" show-ok="{{showOk}}" ok-text="{{okText}}"
+         cancel-text="{{cancelText}}" visible="{{ modalVisible }}" bind:ok="modalOk" bind:cancel="modalCancel">
+    <view>{{modalMsg}}</view>
+</i-modal>
