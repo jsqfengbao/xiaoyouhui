@@ -34,11 +34,9 @@ taoliyuanManager,taoliyuanFront是采用SpringBoot和Vue进行的开发，使用
 1. 搭建好后，运行管理台，帐号密码是admin   admin
 2. 配置学校参数、地区参数、菜单参数等信息
 3. 配置好以后看到的效果图：
-下面是小程序首页信息：
+下面分别是小程序首页信息,社区的板块页面,校友分会页面
 ![Image text](https://gitee.com/mobilesec110/xiaoyouhui/raw/master/imagePic/2.jpg)
-下面是社区的板块页面：
 ![Image text](https://gitee.com/mobilesec110/xiaoyouhui/raw/master/imagePic/1.jpg)
-下面是校友分会页面
 ![Image text](https://gitee.com/mobilesec110/xiaoyouhui/raw/master/imagePic/3.jpg)
 下面是校友汇地图页面，可以在这里找到全国的校友位置及信息：
 ![Image text](https://gitee.com/mobilesec110/xiaoyouhui/raw/master/imagePic/4.jpg)
