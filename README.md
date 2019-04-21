@@ -33,7 +33,15 @@ taoliyuanManager,taoliyuanFront是采用SpringBoot和Vue进行的开发，使用
 
 1. 搭建好后，运行管理台，帐号密码是admin   admin
 2. 配置学校参数、地区参数、菜单参数等信息
-3. xxxx
+3. 配置好以后看到的效果图：
+下面是小程序首页信息：
+![image](https://gitee.com/mobilesec110/xiaoyouhui/blob/master/imagePic/2.jpg)
+下面是社区的板块页面：
+![image](https://gitee.com/mobilesec110/xiaoyouhui/blob/master/imagePic/1.jpg)
+下面是校友分会页面
+![image](https://gitee.com/mobilesec110/xiaoyouhui/blob/master/imagePic/3.jpg)
+下面是校友汇地图页面，可以在这里找到全国的校友位置及信息：
+![image](https://gitee.com/mobilesec110/xiaoyouhui/blob/master/imagePic/4.jpg)
 
 #### 参与贡献
 
@@ -51,3 +59,10 @@ taoliyuanManager,taoliyuanFront是采用SpringBoot和Vue进行的开发，使用
 4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
 5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
 6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+
+
+#### 打赏：
+如果你觉得对你有用，打赏下作者吧：
+![image](https://gitee.com/mobilesec110/xiaoyouhui/blob/master/imagePic/5.jpg)
+![image](https://gitee.com/mobilesec110/xiaoyouhui/blob/master/imagePic/6.jpg)
+![image](https://gitee.com/mobilesec110/xiaoyouhui/blob/master/imagePic/7.jpg)
