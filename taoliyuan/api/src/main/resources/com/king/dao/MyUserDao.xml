@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyUserDao">
+
+    <resultMap type="com.king.entity.MyUserEntity" id="myUserMap">
+        <result property="id" column="id"/>
+		<result property="adminId" column="admin_id"/>
+		<result property="schoolParentId" column="school_parent_id"/>
+		<result property="schoolId" column="school_id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="gender" column="gender"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="lastLoginTime" column="last_login_time"/>
+        <result property="lastLoginIp" column="last_login_ip"/>
+        <result property="nickname" column="nickname"/>
+        <result property="registerIp" column="register_ip"/>
+        <result property="avatar" column="avatar"/>
+        <result property="wxOppenid" column="wx_oppenid"/>
+        <result property="name" column="name"/>
+        <result property="telephone" column="telephone"/>
+		<result property="isShowMobile" column="is_show_mobile"/>
+        <result property="qq" column="qq"/>
+        <result property="webchat" column="webchat"/>
+        <result property="personProfile" column="person_profile"/>
+        <result property="nativeProvince" column="native_province"/>
+		<result property="nativeCity" column="native_city"/>
+		<result property="nativeCountry" column="native_country"/>
+		<result property="nativePosition" column="native_position"/>
+        <result property="schoolName" column="school_name"/>
+        <result property="education" column="education"/>
+        <result property="inShool" column="in_shool"/>
+        <result property="outShool" column="out_shool"/>
+        <result property="depart" column="depart"/>
+		<result property="major" column="major"/>
+        <result property="userClass" column="user_class"/>
+        <result property="studentNo" column="student_no"/>
+        <result property="masterTutor" column="master_tutor"/>
+        <result property="doctorTutor" column="doctor_tutor"/>
+        <result property="workLocation" column="work_location"/>
+		<result property="currentCompany" column="current_company"/>
+        <result property="industryDirection" column="industry_direction"/>
+        <result property="job" column="job"/>
+		<result property="latitude" column="latitude" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+		<result property="longitude" column="longitude"  jdbcType="DOUBLE" javaType="java.lang.Double"/>
+        <result property="enabled" column="enabled"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="myUserMap">
+		select * from my_user where id = #{value}
+	</select>
+
+	<select id="queryByOpenId" resultMap="myUserMap">
+		select * from my_user
+		where 1 = 1
+		<if test="openId != null">
+			and `wx_oppenid` = #{openId}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MyUserEntity">
+		select
+    		`id`,
+			`school_parent_id`,
+			`school_id`,
+    		`username`,
+    		`password`,
+    		`gender`,
+    		`register_time`,
+    		`last_login_time`,
+    		`last_login_ip`,
+    		`nickname`,
+    		`register_ip`,
+    		`avatar`,
+    		`wx_oppenid`,
+    		`name`,
+    		`telephone`,
+			`is_show_mobile`,
+    		`qq`,
+    		`webchat`,
+    		`person_profile`,
+    		`native_province`,
+			`native_city`,
+			`native_country`,
+			`native_position`,
+    		`school_name`,
+    		`education`,
+    		`in_shool`,
+    		`out_shool`,
+    		`depart`,
+			`major`,
+    		`user_class`,
+    		`student_no`,
+    		`master_tutor`,
+    		`doctor_tutor`,
+    		`work_location`,
+			`current_company`,
+    		`industry_direction`,
+    		`job`,
+			`latitude`,
+			`longitude`,
+    		`enabled`,
+    		`is_delete`,
+    		`create_time`,
+    		`update_time`
+		from my_user
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_user
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyUserEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into my_user(
+			`school_parent_id`,
+			`school_id`,
+			`username`,
+			`password`,
+			`gender`,
+			`register_time`,
+			`last_login_time`,
+			`last_login_ip`,
+			`nickname`,
+			`register_ip`,
+			`avatar`,
+			`wx_oppenid`,
+			`name`,
+			`telephone`,
+			`is_show_mobile`,
+			`qq`,
+			`webchat`,
+			`person_profile`,
+			`native_province`,
+			`native_city`,
+			`native_country`,
+			`native_position`,
+			`school_name`,
+			`education`,
+			`in_shool`,
+			`out_shool`,
+			`depart`,
+			`major`,
+			`user_class`,
+			`student_no`,
+			`master_tutor`,
+			`doctor_tutor`,
+			`work_location`,
+			`current_company`,
+			`industry_direction`,
+			`job`,
+			`latitude`,
+			`longitude`,
+			`enabled`,
+			`is_delete`,
+			`create_time`,
+			`update_time`)
+		values(
+			#{schoolParentId},
+			#{schoolId},
+			#{username},
+			#{password},
+			#{gender},
+			#{registerTime},
+			#{lastLoginTime},
+			#{lastLoginIp},
+			#{nickname},
+			#{registerIp},
+			#{avatar},
+			#{wxOppenid},
+			#{name},
+			#{telephone},
+			#{isShowMobile},
+			#{qq},
+			#{webchat},
+			#{personProfile},
+			#{nativeProvince},
+			#{nativeCity},
+			#{nativeCountry},
+			#{nativePosition},
+			#{schoolName},
+			#{education},
+			#{inShool},
+			#{outShool},
+			#{depart},
+			#{major},
+			#{userClass},
+			#{studentNo},
+			#{masterTutor},
+			#{doctorTutor},
+			#{workLocation},
+			#{currentCompany},
+			#{industryDirection},
+			#{job},
+			#{latitude},
+			#{longitude},
+			#{enabled},
+			#{isDelete},
+			#{createTime},
+			#{updateTime})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyUserEntity">
+		update my_user 
+		<set>
+			<if test="schoolParentId != null">`school_parent_id` = #{schoolParentId},</if>
+			<if test="schoolId != null">`school_id` = #{schoolId},</if>
+			<if test="status != null">`status` = #{status},</if>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="gender != null">`gender` = #{gender}, </if>
+			<if test="registerTime != null">`register_time` = #{registerTime}, </if>
+			<if test="lastLoginTime != null">`last_login_time` = #{lastLoginTime}, </if>
+			<if test="lastLoginIp != null">`last_login_ip` = #{lastLoginIp}, </if>
+			<if test="nickname != null">`nickname` = #{nickname}, </if>
+			<if test="registerIp != null">`register_ip` = #{registerIp}, </if>
+			<if test="avatar != null">`avatar` = #{avatar}, </if>
+			<if test="wxOppenid != null">`wx_oppenid` = #{wxOppenid}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="telephone != null">`telephone` = #{telephone}, </if>
+			<if test="isShowMobile != null">`is_show_mobile` = #{isShowMobile}, </if>
+			<if test="qq != null">`qq` = #{qq}, </if>
+			<if test="webchat != null">`webchat` = #{webchat}, </if>
+			<if test="personProfile != null">`person_profile` = #{personProfile}, </if>
+			<if test="nativeProvince != null">`native_province` = #{nativeProvince}, </if>
+			<if test="nativeCity != null">`native_city` = #{nativeCity},</if>
+			<if test="nativeCountry != null">`native_country` = #{nativeCountry},</if>
+			<if test="nativePosition != null">`native_position` = #{nativePosition},</if>
+			<if test="schoolName != null">`school_name` = #{schoolName}, </if>
+			<if test="education != null">`education` = #{education}, </if>
+			<if test="inShool != null">`in_shool` = #{inShool}, </if>
+			<if test="outShool != null">`out_shool` = #{outShool}, </if>
+			<if test="depart != null">`depart` = #{depart}, </if>
+			<if test="major != null">`major` = #{major},</if>
+			<if test="userClass != null">`user_class` = #{userClass}, </if>
+			<if test="studentNo != null">`student_no` = #{studentNo}, </if>
+			<if test="masterTutor != null">`master_tutor` = #{masterTutor}, </if>
+			<if test="doctorTutor != null">`doctor_tutor` = #{doctorTutor}, </if>
+			<if test="workLocation != null">`work_location` = #{workLocation}, </if>
+			<if test="currentCompany != null">`current_company` = #{currentCompany}, </if>
+			<if test="industryDirection != null">`industry_direction` = #{industryDirection}, </if>
+			<if test="job != null">`job` = #{job}, </if>
+			<if test="latitude > 0.0">`latitude` = #{latitude}, </if>
+			<if test="longitude > 0.0">`longitude` = #{longitude}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}, </if>
+			<if test="isDelete != null">`is_delete` = #{isDelete}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_user where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_user where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

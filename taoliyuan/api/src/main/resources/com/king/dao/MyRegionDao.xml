@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyRegionDao">
+
+    <resultMap type="com.king.entity.MyRegionEntity" id="myRegionMap">
+        <result property="id" column="id"/>
+        <result property="regionName" column="region_name"/>
+        <result property="regionCode" column="region_code"/>
+        <result property="enabled" column="enabled"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+	<resultMap id="regionWithSchoolList" type="com.king.entity.MyRegionEntity">
+		<id property="id" column="regionId"></id>
+		<result property="regionName" column="regionName"></result>
+		<collection property="schoolEntityList" ofType="com.king.entity.MySchoolEntity">
+			<id property="id" column="schoolAreaId"/>
+			<result property="schoolName" column="schoolAreaName"/>
+		</collection>
+	</resultMap>
+
+
+	<select id="queryObject" resultType="com.king.entity.MyRegionEntity">
+		select
+			`id`,
+			`region_name`,
+			`region_code`,
+			`enabled`,
+			`create_time`,
+			`update_time`
+		from my_region
+		where id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MyRegionEntity">
+		select
+    		`id`,
+    		`region_name`,
+    		`region_code`,
+    		`enabled`,
+    		`create_time`,
+    		`update_time`
+		from my_region
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+		<if test="enabled != null and enabled.trim() != ''">
+			AND enabled = #{enabled}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by create_time
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_region
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyRegionEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into my_region(
+			`region_name`,
+			`region_code`,
+			`enabled`,
+			`create_time`,
+			`update_time`)
+		values(
+			#{regionName},
+			#{regionCode},
+			#{enabled},
+			#{createTime},
+			#{updateTime})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyRegionEntity">
+		update my_region 
+		<set>
+			<if test="regionName != null">`region_name` = #{regionName}, </if>
+			<if test="regionCode != null">`region_code` = #{regionCode}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_region where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_region where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+
+	<select id="queryRegionWithSchoolList" resultMap="regionWithSchoolList">
+		SELECT
+		r.id regionId,
+		r.region_name regionName,
+		s.id schoolAreaId,
+		s.school_name schoolAreaName
+		FROM my_region r INNER JOIN my_school s
+		ON r.id = s.region_id
+		WHERE s.parent_id = #{schoolId} AND s.school_type=1 AND s.enabled=1 order by r.create_time,s.create_time;
+	</select>
+
+</mapper>

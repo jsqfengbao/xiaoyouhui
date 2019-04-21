@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyCheckByUserDao">
+    <insert id="insertList">
+        insert into my_check_by_user(school_user_id,user_id,by_user_id,school_parent_id)
+        values
+        <foreach collection="array" item="checkByUser" separator=",">
+            (#{checkByUser.userSchoolId},#{checkByUser.userId},#{checkByUser.byUserId},#{checkByUser.schoolParentId})
+        </foreach>
+    </insert>
+
+    <select id="selectIdByByUserIdAndSchoolParentId" resultType="int">
+        select id
+        from my_check_by_user
+        where by_user_id = #{byUserId} and school_parent_id = #{schoolParentId}  and checked = 0 limit 1
+    </select>
+
+    <select id="selectUserListByByUserIdAndSchoolParentId" resultType="com.king.entity.MyUserEntity">
+        select
+        name,
+        school_user_id,
+        2 check_type,
+        user_id id
+        from my_check_by_user bu
+        inner join my_user u on bu.user_id = u.id
+        where school_parent_id = #{schoolParentId} and by_user_id = #{byUserId} and checked=0
+    </select>
+
+    <update id="updateCheckedBySchoolUserId">
+        update my_check_by_user
+        set checked = 1 where school_user_id = #{schoolUserId} and by_user_id = #{byUserId} and checked=0
+    </update>
+
+    <update id="updateCheckedAndRefuseReasonBySchoolUserId">
+        update my_check_by_user
+        set checked = -1 , refuse_reason=#{refuseReason}
+        where school_user_id = #{schoolUserId} and by_user_id = #{byUserId} and checked=0
+    </update>
+
+    <select id="selectListBySchoolUserId" resultType="com.king.entity.MyCheckByUserEntity">
+        select checked
+        from my_check_by_user
+        where by_user_id = #{byUserId} and school_parent_id = #{schoolParentId}  order by create_time limit 3
+    </select>
+</mapper>

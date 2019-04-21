@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyForumModuleSubclassDao">
+
+    <resultMap type="com.king.entity.MyForumModuleSubclassEntity" id="myForumModuleSubclassMap">
+        <result property="id" column="id"/>
+        <result property="moduleId" column="module_id"/>
+        <result property="name" column="name"/>
+        <result property="clickNum" column="click_num"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="enabled" column="enabled"/>
+    </resultMap>
+
+	<select id="getFollowedSubModuleList" resultType="com.king.entity.MyForumModuleSubclassEntity">
+		select
+		sub_module_id id
+		from my_forum_module_user
+		where user_id = #{userId} and enabled = 1
+	</select>
+
+	<select id="getModuleIdById" resultType="int">
+		select
+		module_id
+		from
+		my_forum_module_subclass
+		where id = #{subModuleId}
+	</select>
+
+
+	<select id="queryObject" resultType="com.king.entity.MyForumModuleSubclassEntity">
+		select
+			`id`,
+			`module_id`,
+			name,
+			`click_num`,
+			`create_time`,
+			`update_time`,
+			`enabled`
+		from my_forum_module_subclass
+		where id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MyForumModuleSubclassEntity">
+		select
+    		`id`,
+    		`module_id`,
+    		name,
+    		`click_num`,
+    		`create_time`,
+    		`update_time`,
+    		`enabled`
+		from my_forum_module_subclass
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+		<if test="moduleId != null">
+			AND module_id = #{moduleId}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by create_time
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_forum_module_subclass
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyForumModuleSubclassEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into my_forum_module_subclass(
+			`module_id`,
+			name,
+			`click_num`,
+			`create_time`,
+			`update_time`,
+			`enabled`)
+		values(
+			#{moduleId},
+			#{typeName},
+			#{clickNum},
+			#{createTime},
+			#{updateTime},
+			#{enabled})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyForumModuleSubclassEntity">
+		update my_forum_module_subclass 
+		<set>
+			<if test="moduleId != null">`module_id` = #{moduleId}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="clickNum != null">`click_num` = #{clickNum}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_forum_module_subclass where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_forum_module_subclass where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyActivityDao">
+
+    <resultMap type="com.king.entity.MyActivityEntity" id="myActivityMap">
+        <result property="id" column="id"/>
+		<result property="schoolParentId" column="school_parent_id"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="title" column="title"/>
+		<result property="author" column="author"/>
+        <result property="content" column="content"/>
+        <result property="linkName" column="link_name"/>
+        <result property="linkTelephone" column="link_telephone"/>
+        <result property="activityLogo" column="activity_logo"/>
+        <result property="activityTime" column="activity_time"/>
+		<result property="activityEndTime" column="activity_end_time"/>
+        <result property="activityPlace" column="activity_place"/>
+		<result property="isRecommended" column="is_recommended"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="enabled" column="enabled"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.king.entity.MyActivityEntity">
+		select
+			`id`,
+			`school_parent_id`,
+			`school_id`,
+			`title`,
+			`author`,
+			`content`,
+			`link_name`,
+			`link_telephone`,
+			`activity_logo`,
+			`activity_time`,
+			`activity_end_time`,
+			`activity_place`,
+			`is_recommended`,
+			`is_delete`,
+			`enabled`,
+			`create_time`,
+			`update_time`
+		from my_activity
+		where id = #{id}
+	</select>
+
+	<select id="getRecommendedActivityList" resultType="com.king.entity.MyActivityEntity">
+		select
+		`id`,
+		`school_parent_id`,
+		`school_id`,
+		`title`,
+		`author`,
+		`link_name`,
+		`link_telephone`,
+		`activity_logo`,
+		`activity_time`,
+		`activity_end_time`,
+		`activity_place`,
+		`is_delete`,
+		`enabled`,
+		`create_time`,
+		`update_time`
+		from my_activity
+		where is_recommended = 1
+		<if test="schoolParentId != null">
+			AND school_parent_id =  #{schoolParentId}
+		</if>
+
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MyActivityEntity">
+		select
+    		`id`,
+			`school_parent_id`,
+    		`school_id`,
+    		`title`,
+			`author`,
+    		`content`,
+    		`link_name`,
+    		`link_telephone`,
+    		`activity_logo`,
+    		`activity_time`,
+			`activity_end_time`,
+    		`activity_place`,
+			`is_recommended`,
+    		`is_delete`,
+    		`enabled`,
+    		`create_time`,
+    		`update_time`
+		from my_activity
+		WHERE 1=1
+		<if test="schoolParentId != null">
+			AND school_parent_id =  #{schoolParentId}
+		</if>
+		<if test="isRecommended != null and isRecommended.trim() != ''">
+			AND is_recommended = #{isRecommended}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_activity
+		WHERE 1=1
+		<if test="schoolParentId != null ">
+			AND school_parent_id =  #{schoolParentId}
+		</if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyActivityEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into my_activity(
+			`school_parent_id`,
+			`school_id`,
+			`title`,
+			`author`,
+			`content`,
+			`link_name`,
+			`link_telephone`,
+			`activity_logo`,
+			`activity_time`,
+			`activity_end_time`,
+			`activity_place`,
+			`is_recommended`,
+			`is_delete`,
+			`enabled`,
+			`create_time`,
+			`update_time`)
+		values(
+			#{schoolParentId},
+			#{schoolId},
+			#{title},
+			#{author},
+			#{content},
+			#{linkName},
+			#{linkTelephone},
+			#{activityLogo},
+			#{activityTime},
+			#{activityEndTime},
+			#{activityPlace},
+			#{isRecommended},
+			#{isDelete},
+			#{enabled},
+			#{createTime},
+			#{updateTime})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyActivityEntity">
+		update my_activity 
+		<set>
+			<if test="schoolParentId != null">`school_parent_id` = #{schoolParentId},</if>
+			<if test="schoolId != null">`school_id` = #{schoolId}, </if>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="author != null">`author` = #{author},</if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="linkName != null">`link_name` = #{linkName}, </if>
+			<if test="linkTelephone != null">`link_telephone` = #{linkTelephone}, </if>
+			<if test="activityLogo != null">`activity_logo` = #{activityLogo}, </if>
+			<if test="activityTime != null">`activity_time` = #{activityTime}, </if>
+			<if test="activityEndTime != null">`activity_end_time` = #{activityEndTime},</if>
+			<if test="activityPlace != null">`activity_place` = #{activityPlace}, </if>
+			<if test="isRecommended != null">`is_recommended` = #{isRecommended},</if>
+			<if test="isDelete != null">`is_delete` = #{isDelete}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_activity where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_activity where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

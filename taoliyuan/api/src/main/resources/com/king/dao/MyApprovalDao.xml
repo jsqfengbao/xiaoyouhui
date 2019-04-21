@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyApprovalDao">
+
+    <resultMap type="com.king.entity.MyApprovalEntity" id="myApprovalMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="approvalAdminId" column="approval_admin_id"/>
+        <result property="status" column="status"/>
+        <result property="refusedReason" column="refused_reason"/>
+        <result property="enabled" column="enabled"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.king.entity.MyApprovalEntity">
+		select
+			`id`,
+			`user_id`,
+			`approval_admin_id`,
+			`status`,
+			`refused_reason`,
+			`enabled`,
+			`create_time`,
+			`update_time`
+		from my_approval
+		where id = #{id}
+	</select>
+
+	<select id="queryByUserId" resultType="com.king.entity.MyApprovalEntity">
+		select *
+		from my_approval
+		where 1=1
+		<if test="userId != null">
+			AND user_id = #{userId} and enabled = "1" limit 1;
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MyApprovalEntity">
+		select
+    		`id`,
+    		`user_id`,
+    		`approval_admin_id`,
+    		`status`,
+    		`refused_reason`,
+    		`enabled`,
+    		`create_time`,
+    		`update_time`
+		from my_approval
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_approval
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyApprovalEntity">
+		insert into my_approval(
+			`id`,
+			`user_id`,
+			`approval_admin_id`,
+			`status`,
+			`refused_reason`,
+			`enabled`,
+			`create_time`,
+			`update_time`)
+		values(
+			#{id},
+			#{userId},
+			#{approvalAdminId},
+			#{status},
+			#{refusedReason},
+			#{enabled},
+			#{createTime},
+			#{updateTime})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyApprovalEntity">
+		update my_approval 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="approvalAdminId != null">`approval_admin_id` = #{approvalAdminId}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="refusedReason != null">`refused_reason` = #{refusedReason}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_approval where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_approval where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

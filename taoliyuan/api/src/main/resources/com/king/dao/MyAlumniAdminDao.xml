@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyAlumniAdminDao">
+
+    <resultMap type="com.king.entity.MyAlumniAdminEntity" id="myAlumniAdminMap">
+        <result property="id" column="id"/>
+		<result property="schoolParentId" column="school_parent_id"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="schoolName" column="school_name"/>
+        <result property="adminName" column="admin_name"/>
+        <result property="adminPhone" column="admin_phone"/>
+        <result property="enabled" column="enabled"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.king.entity.MyAlumniAdminEntity">
+		select
+			`id`,
+			`school_parent_id`,
+			`school_id`,
+			`school_name`,
+			`admin_name`,
+			`admin_phone`,
+			`enabled`,
+			`create_time`,
+			`update_time`
+		from my_alumni_admin
+		where id = #{id}
+	</select>
+	<select id="queryListBySchoolIdAndParentId" resultType="com.king.entity.MyAlumniAdminEntity">
+		select
+		`id`,
+		`school_parent_id`,
+		`school_id`,
+		`school_name`,
+		`admin_name`,
+		`admin_phone`,
+		`enabled`,
+		`create_time`,
+		`update_time`
+		from my_alumni_admin
+		WHERE 1=1
+		<if test="schoolId != null ">
+			AND school_id = #{schoolId}
+		</if>
+		<if test="schoolParentId != null ">
+			AND school_parent_id = #{schoolParentId}
+		</if>
+	</select>
+
+
+	<select id="queryList" resultType="com.king.entity.MyAlumniAdminEntity">
+		select
+    		`id`,
+			`school_parent_id`,
+    		`school_id`,
+    		`school_name`,
+    		`admin_name`,
+    		`admin_phone`,
+    		`enabled`,
+    		`create_time`,
+    		`update_time`
+		from my_alumni_admin
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+		<if test="schoolParentId != null">
+			or school_parent_id = #{schoolParentId}
+			or school_id = #{schoolParentId}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_alumni_admin
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+		<if test="schoolParentId != null">
+			AND school_parent_id = #{schoolParentId}
+		</if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyAlumniAdminEntity">
+		insert into my_alumni_admin(
+			`id`,
+			`school_parent_id`,
+			`school_id`,
+			`school_name`,
+			`admin_name`,
+			`admin_phone`,
+			`enabled`,
+			`create_time`,
+			`update_time`)
+		values(
+			#{id},
+			#{schoolParentId},
+			#{schoolId},
+			#{schoolName},
+			#{adminName},
+			#{adminPhone},
+			#{enabled},
+			#{createTime},
+			#{updateTime})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyAlumniAdminEntity">
+		update my_alumni_admin 
+		<set>
+			<if test="schoolParentId != null">`school_parent_id` = #{schoolParentId},</if>
+			<if test="schoolId != null">`school_id` = #{schoolId}, </if>
+			<if test="schoolName != null">`school_name` = #{schoolName}, </if>
+			<if test="adminName != null">`admin_name` = #{adminName}, </if>
+			<if test="adminPhone != null">`admin_phone` = #{adminPhone}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_alumni_admin where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_alumni_admin where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

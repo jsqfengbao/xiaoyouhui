@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyForumReplyDao">
+
+    <resultMap type="com.king.entity.MyForumReplyEntity" id="myForumReplyMap">
+        <result property="id" column="id"/>
+        <result property="forumId" column="forum_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="content" column="content"/>
+		<result property="type" column="type"/>
+        <result property="parentReplyId" column="parent_reply_id"/>
+        <result property="parentReplyUserId" column="parent_reply_user_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="enabled" column="enabled"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.king.entity.MyForumReplyEntity">
+		select
+			`id`,
+			`forum_id`,
+			`user_id`,
+			`content`,
+			`type`,
+			`parent_reply_id`,
+			`parent_reply_user_id`,
+			`create_time`,
+			`update_time`,
+			`enabled`
+		from my_forum_reply
+		where id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MyForumReplyEntity">
+		select
+    		`id`,
+    		`forum_id`,
+    		`user_id`,
+    		`content`,
+			`type`,
+    		`parent_reply_id`,
+    		`parent_reply_user_id`,
+    		`create_time`,
+    		`update_time`,
+    		`enabled`
+		from my_forum_reply
+		WHERE 1=1
+		<if test="forumId != null">
+			AND forum_id = #{forumId}
+		</if>
+		<if test="userId != null">
+			AND user_id = #{userId}
+		</if>
+		<if test="type != null and type.trim() != ''">
+			AND type = #{type}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_forum_reply
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyForumReplyEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into my_forum_reply(
+			`forum_id`,
+			`user_id`,
+			`content`,
+			`type`,
+			`parent_reply_id`,
+			`parent_reply_user_id`,
+			`create_time`,
+			`update_time`,
+			`enabled`)
+		values(
+			#{forumId},
+			#{userId},
+			#{content},
+			#{type},
+			#{parentReplyId},
+			#{parentReplyUserId},
+			#{createTime},
+			#{updateTime},
+			#{enabled})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyForumReplyEntity">
+		update my_forum_reply 
+		<set>
+			<if test="forumId != null">`forum_id` = #{forumId}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="type != null">`type` = #{type},</if>
+			<if test="parentReplyId != null">`parent_reply_id` = #{parentReplyId}, </if>
+			<if test="parentReplyUserId != null">`parent_reply_user_id` = #{parentReplyUserId}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_forum_reply where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_forum_reply where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

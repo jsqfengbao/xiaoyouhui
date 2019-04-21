@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyCompanyDao">
+
+    <resultMap type="com.king.entity.MyCompanyEntity" id="myCompanyMap">
+        <result property="id" column="id"/>
+        <result property="schoolParentId" column="school_parent_id"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="companyName" column="company_name"/>
+        <result property="content" column="content"/>
+        <result property="description" column="description"/>
+        <result property="link1Name" column="link1_name"/>
+        <result property="link1Telephone" column="link1_telephone"/>
+        <result property="link2Telephone" column="link2_telephone"/>
+        <result property="link2Name" column="link2_name"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="enabled" column="enabled"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.king.entity.MyCompanyEntity">
+		select
+			`id`,
+			`school_parent_id`,
+			`school_id`,
+			`company_name`,
+			`content`,
+			`description`,
+			`link1_name`,
+			`link1_telephone`,
+			`link2_telephone`,
+			`link2_name`,
+			`is_delete`,
+			`enabled`,
+			`create_time`,
+			`update_time`
+		from my_company
+		where id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MyCompanyEntity">
+		select
+    		`id`,
+    		`school_parent_id`,
+    		`school_id`,
+    		`company_name`,
+    		`content`,
+    		`description`,
+    		`link1_name`,
+    		`link1_telephone`,
+    		`link2_telephone`,
+    		`link2_name`,
+    		`is_delete`,
+    		`enabled`,
+    		`create_time`,
+    		`update_time`
+		from my_company
+		WHERE 1=1
+		<if test="schoolParentId != null ">
+			AND school_parent_id = #{schoolParentId}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_company
+		WHERE 1=1
+		<if test="schoolParentId != null ">
+			AND school_parent_id = #{schoolParentId}
+		</if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyCompanyEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into my_company(
+			`school_parent_id`,
+			`school_id`,
+			`company_name`,
+			`content`,
+			`description`,
+			`link1_name`,
+			`link1_telephone`,
+			`link2_telephone`,
+			`link2_name`,
+			`is_delete`,
+			`enabled`,
+			`create_time`,
+			`update_time`)
+		values(
+			#{schoolParentId},
+			#{schoolId},
+			#{companyName},
+			#{content},
+			#{description},
+			#{link1Name},
+			#{link1Telephone},
+			#{link2Telephone},
+			#{link2Name},
+			#{isDelete},
+			#{enabled},
+			#{createTime},
+			#{updateTime})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyCompanyEntity">
+		update my_company 
+		<set>
+			<if test="schoolParentId != null">`school_parent_id` = #{schoolParentId}, </if>
+			<if test="schoolId != null">`school_id` = #{schoolId}, </if>
+			<if test="companyName != null">`company_name` = #{companyName}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="description != null">`description` = #{description}, </if>
+			<if test="link1Name != null">`link1_name` = #{link1Name}, </if>
+			<if test="link1Telephone != null">`link1_telephone` = #{link1Telephone}, </if>
+			<if test="link2Telephone != null">`link2_telephone` = #{link2Telephone}, </if>
+			<if test="link2Name != null">`link2_name` = #{link2Name}, </if>
+			<if test="isDelete != null">`is_delete` = #{isDelete}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_company where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_company where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

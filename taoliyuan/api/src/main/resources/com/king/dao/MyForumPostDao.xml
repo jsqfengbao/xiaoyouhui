@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyForumPostDao">
+
+    <resultMap type="com.king.entity.MyForumPostEntity" id="myForumMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="moduleId" column="module_id"/>
+        <result property="subModuleId" column="module_sub_id"/>
+        <result property="title" column="title"/>
+        <result property="imgs" column="imgs"/>
+        <result property="top" column="top"/>
+        <result property="content" column="content"/>
+        <result property="viewNum" column="view_num"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="enabled" column="enabled"/>
+    </resultMap>
+
+	<resultMap type="com.king.entity.MyForumPostEntity" id="getFollowedModulePostList">
+		<result property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="moduleId" column="module_id"/>
+		<result property="subModuleId" column="module_sub_id"/>
+		<result property="title" column="title"/>
+		<result property="imgs" column="imgs"/>
+		<result property="top" column="top"/>
+		<result property="content" column="content"/>
+		<result property="viewNum" column="view_num"/>
+		<result property="shareNum" column="share_num"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="enabled" column="enabled"/>
+
+		<result property="myUserEntity.name" column="name"/>
+		<result property="myUserEntity.avatar" column="avatar"/>
+		<result property="myUserEntity.id" column="user_id"/>
+
+		<result property="myForumModuleSubclassEntity.name" column="sub_module_name"/>
+	</resultMap>
+
+	<select id="getFollowedModulePostList" resultMap="getFollowedModulePostList">
+        select
+        p.id as id,
+        p.title as title,
+		p.top as top,
+		left(p.content,80) as content,
+		p.view_num as view_num,
+		p.zan_num as zan_num,
+		p.share_num as share_num,
+		p.comment_num as comment_num,
+		p.create_time as create_time,
+		p.update_time as update_time,
+		ms.name as sub_module_name,
+		u.id as user_id,
+		u.name as `name`,
+		u.avatar as avatar
+        from my_forum_module_user mu
+        inner join my_forum_post  p on mu.sub_module_id = p.sub_module_id
+        inner join my_forum_module_subclass ms on ms.id = p.sub_module_id
+        inner join my_user u on u.id = p.user_id
+        where mu.user_id = #{userId} and mu.enabled=1
+        order by p.update_time desc
+    </select>
+
+	<select id="getZanedPostIdByUserIdAndPostId" resultType="int">
+		select post_id
+		from
+		my_forum_post_zan_user
+		where post_id = #{postId} and user_id = #{userId} and enabled = 1
+	</select>
+
+    <select id="getZanedPostIdListInSelectedPostIdListByUserId" resultType="int">
+        select post_id
+        from my_forum_post_zan_user
+        where post_id in
+        <foreach collection="postIdList" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+        and user_id = #{userId} and enabled = 1
+    </select>
+
+	<update id="increaseViewNum">
+		update my_forum_post set view_num = view_num+1 where id = #{id}
+	</update>
+
+    <update id="increaseZanNum" >
+        update my_forum_post
+        set zan_num = zan_num +1
+        where id = #{id}
+    </update>
+
+    <update id="decreaseZanNum" >
+        update my_forum_post
+        set zan_num = zan_num -1
+        where id = #{id}
+    </update>
+
+	<update id="increaseShareNum">
+		update my_forum_post
+        set share_num = share_num +1
+        where id = #{id}
+	</update>
+	<update id="increaseCommentNum">
+		update my_forum_post
+        set comment_num = comment_num +1
+        where id = #{id}
+	</update>
+	<select id="getPostDetailById" resultMap="getFollowedModulePostList">
+        select
+        p.id as id,
+        p.title as title,
+		p.top as top,
+		p.content as content,
+		p.view_num as view_num,
+		p.zan_num as zan_num,
+		p.comment_num as comment_num,
+		p.share_num as share_num,
+		p.create_time as create_time,
+		p.update_time as update_time,
+		ms.name as sub_module_name,
+		u.id as user_id,
+		u.name as `name`,
+		u.avatar as avatar
+        from my_forum_post  p
+        inner join my_forum_module_subclass ms on ms.id = p.sub_module_id
+        inner join my_user u on u.id = p.user_id
+        where p.id = #{id}
+
+    </select>
+	
+	<update id="increaseViewNumById">
+		update my_forum_post
+		set view_num = view_num+1
+		where id = #{id}
+	</update>
+
+	<select id="queryObject" resultType="com.king.entity.MyForumPostEntity">
+		select
+			`id`,
+			`user_id`,
+			`module_id`,
+			sub_module_id,
+			title,
+			`imgs`,
+			`top`,
+			`content`,
+			`view_num`,
+			`create_time`,
+			`enabled`
+		from my_forum_post
+		where id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MyForumPostEntity">
+		select
+    		`id`,
+    		`user_id`,
+    		`module_id`,
+    		sub_module_id,
+    		title,
+    		`imgs`,
+    		`top`,
+    		`content`,
+    		`view_num`,
+    		`create_time`,
+    		`update_time`,
+    		`enabled`
+		from my_forum_post
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+		<if test="moduleSubId != null">
+			AND sub_module_id = #{moduleSubId}
+		</if>
+		<if test="enabled != null and enabled.trim() != ''">
+			AND enabled = #{enabled}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_forum_post
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyForumPostEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into my_forum_post(
+			`user_id`,
+			`module_id`,
+			sub_module_id,
+			title,
+			`imgs`,
+
+		<if test="top != null ">
+			`top`,
+		</if>
+			`content`)
+		values(
+			#{userId},
+			#{moduleId},
+			#{moduleSubId},
+			#{title},
+			#{imgs},
+		<if test="top != null ">
+			#{top},
+		</if>
+
+			#{content}
+			)
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyForumPostEntity">
+		update my_forum_post
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="moduleId != null">`module_id` = #{moduleId}, </if>
+			<if test="moduleSubId != null">`module_sub_id` = #{moduleSubId}, </if>
+			<if test="title != null">`forum_title` = #{title}, </if>
+			<if test="imgs != null">`imgs` = #{imgs}, </if>
+			<if test="top != null">`top` = #{top}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="viewNum != null">`view_num` = #{viewNum}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_forum_post where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_forum_post where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

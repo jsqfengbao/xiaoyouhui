@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.SysUserSchoolDao">
+    <select id="getSchoolIdListBySysUserId" resultType="int">
+        select school_id
+        from sys_user_school us
+        inner join sys_user u on us.sys_user_id = u.user_id
+        where us.sys_user_id = #{sysUserId}  and us.enabled=1 and u.enabled =1
+    </select>
+</mapper>

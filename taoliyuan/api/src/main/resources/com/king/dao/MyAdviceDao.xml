@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MyAdviceDao">
+
+    <resultMap type="com.king.entity.MyAdviceEntity" id="myAdviceMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="adviceContent" column="advice_content"/>
+		<result property="adviceType" column="advice_type"/>
+        <result property="enabled" column="enabled"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.king.entity.MyAdviceEntity">
+		select
+			`id`,
+			`user_id`,
+			`advice_content`,
+			`advice_type`,
+			`enabled`,
+			`create_time`,
+			`update_time`
+		from my_advice
+		where id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MyAdviceEntity">
+		select
+    		`id`,
+    		`user_id`,
+    		`advice_content`,
+			`advice_type`,
+    		`enabled`,
+    		`create_time`,
+    		`update_time`
+		from my_advice
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_advice
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MyAdviceEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into my_advice(
+			`user_id`,
+			`advice_content`,
+			`advice_type`,
+			`enabled`,
+			`create_time`,
+			`update_time`)
+		values(
+			#{userId},
+			#{adviceContent},
+			#{adviceType},
+			#{enabled},
+			#{createTime},
+			#{updateTime})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MyAdviceEntity">
+		update my_advice 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="adviceContent != null">`advice_content` = #{adviceContent}, </if>
+			<if test="adviceType != null">`advice_type` = #{adviceType},</if>
+			<if test="enabled != null">`enabled` = #{enabled}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_advice where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_advice where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

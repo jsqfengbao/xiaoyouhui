@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.MySmsCodeDao">
+
+    <resultMap type="com.king.entity.MySmsCodeEntity" id="mySmsCodeMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="phoneNum" column="phone_num"/>
+        <result property="smsCode" column="sms_code"/>
+        <result property="createTime" column="create_time"/>
+        <result property="used" column="used"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.king.entity.MySmsCodeEntity">
+		select
+			`id`,
+			`user_id`,
+			`phone_num`,
+			`sms_code`,
+			`create_time`,
+			`used`
+		from my_sms_code
+		where id = #{id}
+	</select>
+
+	<select id="queryByParam" resultType="com.king.entity.MySmsCodeEntity">
+		select
+			`id`,
+			`user_id`,
+			`phone_num`,
+			`sms_code`,
+			`create_time`,
+			`used`
+		from my_sms_code
+		where 1=1
+		<if test="userId != null">
+			AND user_id = #{userId}
+		</if>
+		<if test="mobile != null and mobile.trim() != ''">
+			AND phone_num = #{mobile} AND  used = '0' order by id desc limit 1
+		</if>
+
+	</select>
+
+	<select id="queryByUserId" resultType="com.king.entity.MySmsCodeEntity">
+		select
+			`id`,
+			`user_id`,
+			`phone_num`,
+			`sms_code`,
+			`create_time`,
+			`used`
+		from my_sms_code
+		where user_id = #{userId} order by id desc limit 1
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.MySmsCodeEntity">
+		select
+    		`id`,
+    		`user_id`,
+    		`phone_num`,
+    		`sms_code`,
+    		`create_time`,
+    		`used`
+		from my_sms_code
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from my_sms_code
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.MySmsCodeEntity">
+		insert into my_sms_code(
+			`id`,
+			`user_id`,
+			`phone_num`,
+			`sms_code`,
+			`create_time`,
+			`used`)
+		values(
+			#{id},
+			#{userId},
+			#{phoneNum},
+			#{smsCode},
+			#{createTime},
+			#{used})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.MySmsCodeEntity">
+		update my_sms_code 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="phoneNum != null">`phone_num` = #{phoneNum}, </if>
+			<if test="smsCode != null">`sms_code` = #{smsCode}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="used != null">`used` = #{used}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from my_sms_code where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from my_sms_code where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

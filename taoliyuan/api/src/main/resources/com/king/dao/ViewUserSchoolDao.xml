@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.king.dao.ViewUserSchoolDao">
+
+    <resultMap type="com.king.entity.ViewUserSchoolEntity" id="viewUserSchoolMap">
+		<result property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="avatar" column="avatar"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="schoolParentId" column="school_parent_id"/>
+        <result property="inShool" column="in_shool"/>
+        <result property="outShool" column="out_shool"/>
+		<result property="depart" column="depart"/>
+        <result property="education" column="education"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.king.entity.ViewUserSchoolEntity">
+		select
+			`user_id`,
+			`name`,
+			`avatar`,
+			`school_id`,
+			`school_parent_id`,
+			`in_shool`,
+			`out_shool`,
+			`depart`,
+			`education`,
+			`latitude`,
+			`longitude`,
+			`status`
+		from view_user_school
+		where name = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.king.entity.ViewUserSchoolEntity">
+		select
+			`user_id`,
+    		`name`,
+    		`avatar`,
+    		`school_id`,
+    		`school_parent_id`,
+    		`in_shool`,
+    		`out_shool`,
+			`depart`,
+    		`education`,
+    		`latitude`,
+    		`longitude`,
+    		`status`
+		from view_user_school
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+		<if test="schoolParentId != null">
+			AND school_parent_id = #{schoolParentId}
+		</if>
+        <if test="schoolAreaId != null">
+            AND school_id = #{schoolAreaId}
+        </if>
+		<if test="status != null">
+			AND status = #{status}
+		</if>
+		<if test="latitude != null">
+			AND latitude > 0
+		</if>
+		<if test="longitude != null">
+			AND longitude > 0
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by name desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from view_user_school
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.king.entity.ViewUserSchoolEntity">
+		insert into view_user_school(
+			`user_id`,
+			`name`,
+			`avatar`,
+			`school_id`,
+			`school_parent_id`,
+			`in_shool`,
+			`out_shool`,
+			`depart`,
+			`education`,
+			`latitude`,
+			`longitude`,
+			`status`)
+		values(
+			#{userId},
+			#{name},
+			#{avatar},
+			#{schoolId},
+			#{schoolParentId},
+			#{inShool},
+			#{outShool},
+			#{depart},
+			#{education},
+			#{latitude},
+			#{longitude},
+			#{status})
+	</insert>
+	 
+	<update id="update" parameterType="com.king.entity.ViewUserSchoolEntity">
+		update view_user_school 
+		<set>
+			<if test="userId != null">`user_id` = #{userId},</if>
+			<if test="avatar != null">`avatar` = #{avatar}, </if>
+			<if test="schoolId != null">`school_id` = #{schoolId}, </if>
+			<if test="schoolParentId != null">`school_parent_id` = #{schoolParentId}, </if>
+			<if test="inShool != null">`in_shool` = #{inShool}, </if>
+			<if test="outShool != null">`out_shool` = #{outShool}, </if>
+			<if test="depart != null">`depart` = #{depart},</if>
+			<if test="education != null">`education` = #{education}, </if>
+			<if test="latitude != null">`latitude` = #{latitude}, </if>
+			<if test="longitude != null">`longitude` = #{longitude}, </if>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where name = #{name}
+	</update>
+	
+	<delete id="delete">
+		delete from view_user_school where name = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from view_user_school where name in 
+		<foreach item="name" collection="array" open="(" separator="," close=")">
+			#{name}
+		</foreach>
+	</delete>
+
+</mapper>
