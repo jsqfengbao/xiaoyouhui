@@ -5,22 +5,34 @@
 前端部分
 管理台前后端部分
 现在已投产运行
-欢迎广大爱好者私聊-共同合作开发运营
+由于和运营人员合作意见分歧很大，代码是我全程开发的，大概5个月时间。现在开源出来供广大爱好者交流分享
+
+欢迎广大爱好者私聊-共同合作开发运营，可以加楼主QQ：7727-57-263
+也可以加QQ群交流 704802627
 
 #### 软件架构
 软件架构说明
+项目中有五个工程，下面分别介绍进行说明
+taoliyuan:小程序接口部分，包含了校友汇、活动、新闻、公司、社区、个人信息等模块
+taoliyuanManager：校友会管理台部分，能对校友会成员信息进行审核及多个分会进行管理。
+taoliyuanFront:校友会管理台前端部分，和taoliyuanManager进行统一管理。
+xiaochengxu-taoliyuan:微信小程序部分，采用微信原生语言进行开发
+renren-generator：这个工程是管理台自动生成代码的插件，管理台自动生成能够省略70%的代码开发部分。
+db:数据库使用的是Mysql数据库，安装taoliyuan.sql里面有结构文件和初始化操作数据。
 
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 下载taoliyuan部分，先安装mysql导入数据库taoliyuan.sql文件
+2、taoliyuan接口部分采用的是SpringMVC框架进行的开发，配置好Tomcat
+3、xiaochengxu-taoliyuan:导入到微信开发工具，配置好连接，自己可以看到下面的运行效果图
+4、同理其他两个工程也是这样的操作。
+taoliyuanManager,taoliyuanFront是采用SpringBoot和Vue进行的开发，使用renren-fast和renren-fast-vue管理台进行的二次开发。
 
 #### 使用说明
 
-1. xxxx
-2. xxxx
+1. 搭建好后，运行管理台，帐号密码是admin   admin
+2. 配置学校参数、地区参数、菜单参数等信息
 3. xxxx
 
 #### 参与贡献
